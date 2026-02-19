@@ -2,1483 +2,433 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Amit's Indian Nutrition Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>Amit's Nutrition Hub v8</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"/>
 <style>
 /* ══════════════════════════════════════════
-   AMIT'S NUTRITION HUB — FULL RESPONSIVE CSS
-   Mobile-first, scales up to 1200px desktop
+   AMIT'S NUTRITION HUB — V8
+   Optimized: Mobile-First Grid, Sticky Nav, Touch Targets
    ══════════════════════════════════════════ */
 :root{
   --sf:#E8671B; --sf2:#F9913E; --gr:#1A6B3C; --gr2:#2D9158;
   --cr:#FEF6EC; --tx:#1C1C1C; --mu:#767676; --bd:#EDE0D4; --bg:#FFFBF6;
-  --blu:#1565C0; --pur:#6A1B9A;
+  --blu:#1565C0; --pur:#6A1B9A; --fiber:#8D6E63;
   --radius-sm:10px; --radius-md:14px; --radius-lg:18px;
   --shadow-sm:0 2px 8px rgba(0,0,0,.06);
-  --shadow-md:0 4px 16px rgba(0,0,0,.09);
-  --shadow-lg:0 8px 32px rgba(0,0,0,.13);
-  --gap-sm:10px; --gap-md:14px; --gap-lg:20px;
   --p-card:16px;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0; -webkit-tap-highlight-color: transparent;}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
 body{
   font-family:'DM Sans',sans-serif;
   background:var(--bg);
   min-height:100vh;
   color:var(--tx);
-  padding:10px 10px 90px;
+  padding:12px;
   font-size:14px;
   line-height:1.5;
+  max-width:1200px;
+  margin:0 auto;
 }
 
 /* ── HEADER ── */
 .hdr{
   background:linear-gradient(135deg,var(--sf),#C94A10);
   border-radius:var(--radius-lg);
-  padding:14px 16px;
-  max-width:1100px;
-  margin:0 auto 14px;
+  padding:16px 20px;
+  margin-bottom:12px;
   display:flex;
   align-items:center;
   gap:12px;
-  box-shadow:0 6px 24px rgba(232,103,27,.3);
+  box-shadow:0 6px 24px rgba(232,103,27,.25);
   position:relative;
   overflow:hidden;
 }
 .hdr::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);}
-.hdr::after{content:'';position:absolute;bottom:-60px;left:38%;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.04);}
-.hdr-icon{font-size:36px;line-height:1;z-index:1;flex-shrink:0;}
+.hdr-icon{font-size:32px;line-height:1;z-index:1;flex-shrink:0;}
 .hdr-text{z-index:1;flex:1;min-width:0;}
-.hdr-text h1{font-family:'Playfair Display',serif;font-size:clamp(16px,3vw,26px);color:#fff;font-weight:900;line-height:1.2;}
-.hdr-text p{color:rgba(255,255,255,.8);font-size:11px;margin-top:3px;display:none;}
-.amit-badge{margin-left:auto;z-index:1;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:12px;padding:7px 13px;text-align:center;backdrop-filter:blur(4px);flex-shrink:0;}
-.amit-badge .aname{font-size:13px;font-weight:700;color:#fff;}
-.amit-badge .ainfo{font-size:9.5px;color:rgba(255,255,255,.8);}
+.hdr-text h1{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,24px);color:#fff;font-weight:900;line-height:1.2;}
+.hdr-text p{color:rgba(255,255,255,.9);font-size:12px;margin-top:2px;}
 
-/* ── TABS ── */
+/* ── STICKY TABS ── */
+.tab-nav-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  padding-top: 5px;
+  padding-bottom: 10px;
+  margin-left: -12px;
+  margin-right: -12px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
 .tab-nav{
-  max-width:1100px;
-  margin:0 auto 12px;
-  display:flex;
-  gap:5px;
-  overflow-x:auto;
-  padding-bottom:2px;
-  scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
+  display:flex; gap:8px;
+  overflow-x:auto; padding-bottom:4px; scrollbar-width:none;
 }
 .tab-nav::-webkit-scrollbar{display:none;}
 .tab-btn{
-  padding:7px 12px;
-  border-radius:30px;
-  border:2px solid var(--bd);
-  background:#fff;
-  font-family:'DM Sans',sans-serif;
-  font-size:11.5px;
-  font-weight:600;
-  cursor:pointer;
-  transition:all .18s;
-  color:var(--mu);
-  white-space:nowrap;
-  flex-shrink:0;
-  touch-action:manipulation;
+  padding:9px 15px; border-radius:30px; border:1px solid var(--bd);
+  background:#fff; font-size:13px; font-weight:700; cursor:pointer;
+  color:var(--mu); white-space:nowrap; flex-shrink:0; transition:all .18s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
 }
-.tab-btn.active{background:var(--sf);color:#fff;border-color:var(--sf);box-shadow:0 3px 10px rgba(232,103,27,.3);}
-.tab-btn:hover:not(.active){border-color:var(--sf);color:var(--sf);}
-.tab-btn.bmi-tab.active{background:var(--blu);border-color:var(--blu);box-shadow:0 3px 10px rgba(21,101,192,.3);}
-.tab-btn.bmi-tab:hover:not(.active){border-color:var(--blu);color:var(--blu);}
-.tab-btn.sug-tab.active{background:var(--pur);border-color:var(--pur);box-shadow:0 3px 10px rgba(106,27,154,.3);}
-.tab-btn.sug-tab:hover:not(.active){border-color:var(--pur);color:var(--pur);}
-.tab-btn.tips-tab.active{background:#00695C;border-color:#00695C;box-shadow:0 3px 10px rgba(0,105,92,.3);}
-.tab-btn.tips-tab:hover:not(.active){border-color:#00695C;color:#00695C;}
+.tab-btn.active{background:var(--sf);color:#fff;border-color:var(--sf);box-shadow:0 3px 10px rgba(232,103,27,.3); transform: translateY(-1px);}
+/* Custom Colors */
+.tab-btn[data-t="bmi"].active{background:var(--blu);border-color:var(--blu);}
+.tab-btn[data-t="budget"].active{background:var(--pur);border-color:var(--pur);}
+.tab-btn[data-t="timing"].active{background:#00695C;border-color:#00695C;}
 
-.tab-panel{display:none;max-width:1100px;margin:0 auto;}
+.tab-panel{display:none;animation:fadeIn 0.3s ease;}
 .tab-panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── CARDS ── */
-.card{
-  background:#fff;
-  border-radius:var(--radius-md);
-  padding:var(--p-card);
-  border:1px solid var(--bd);
-  box-shadow:var(--shadow-sm);
-}
-.sec-title{
-  font-family:'Playfair Display',serif;
-  font-size:15px;
-  font-weight:700;
-  color:var(--gr);
-  margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  gap:6px;
+/* ── UTILS ── */
+.card{background:#fff;border-radius:var(--radius-md);padding:var(--p-card);border:1px solid var(--bd);box-shadow:var(--shadow-sm);margin-bottom:14px;}
+.sec-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gr);margin-bottom:14px;display:flex;align-items:center;gap:6px;}
+
+/* ── CALCULATOR GRID ── */
+.calc-grid{display:flex;flex-direction:column;gap:14px;}
+@media(min-width:900px){
+  .calc-grid{display:grid;grid-template-columns:1.3fr 0.7fr;gap:20px;align-items:start;}
+  body{padding:20px;}
 }
 
-/* ── CATEGORY CHIPS ── */
-.cat-scroll{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-.cat-scroll::-webkit-scrollbar{display:none;}
+/* ── FOOD SELECTION ── */
+.search-wrap{position:relative;margin-bottom:12px;}
+.search-wrap input{
+  width:100%;padding:12px 12px 12px 40px;
+  border:1.5px solid var(--bd);border-radius:var(--radius-sm);
+  font-family:'DM Sans',sans-serif;font-size:16px; /* Prevents iOS Zoom */
+  background:var(--cr);outline:none;
+  transition: border-color 0.2s;
+}
+.search-wrap input:focus{border-color: var(--sf);}
+.s-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;}
+
+.cat-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:8px;scrollbar-width:none;}
 .cat-chip{
-  border:1.5px solid var(--bd);
-  border-radius:20px;
-  padding:5px 11px;
-  font-size:11px;
-  font-weight:600;
-  cursor:pointer;
-  white-space:nowrap;
-  background:#fff;
-  color:var(--mu);
-  transition:all .15s;
-  flex-shrink:0;
-  touch-action:manipulation;
+  border:1.5px solid var(--bd);border-radius:20px;padding:6px 14px;
+  font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;
+  background:#fff;color:var(--mu);flex-shrink:0;
 }
 .cat-chip.active{background:var(--sf);color:#fff;border-color:var(--sf);}
-.cat-chip:hover:not(.active){border-color:var(--sf);color:var(--sf);}
 
-/* ── QUICK PICK ROW ── */
-.quick-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--mu);margin-bottom:5px;}
-.quick-foods{display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-.quick-foods::-webkit-scrollbar{display:none;}
-.qf-chip{
-  display:flex;align-items:center;gap:4px;
-  padding:5px 10px;
-  border-radius:20px;
-  border:2px solid var(--bd);
-  background:#fff;
-  font-size:11px;font-weight:600;
-  cursor:pointer;white-space:nowrap;
-  flex-shrink:0;transition:all .16s;
-  color:var(--tx);touch-action:manipulation;
-}
-.qf-chip:hover,.qf-chip.qf-sel{background:var(--sf);color:#fff;border-color:var(--sf);}
-.qf-chip .qf-em{font-size:15px;}
-
-/* ── CALCULATOR TAB LAYOUT ── */
-/* Mobile: single column stacked */
-.calc-grid{display:flex;flex-direction:column;gap:var(--gap-md);}
-
-/* ── FOOD GRID ── */
-.search-wrap{position:relative;margin-bottom:9px;}
-.search-wrap input{
-  width:100%;padding:9px 12px 9px 34px;
-  border:1.5px solid var(--bd);border-radius:var(--radius-sm);
-  font-family:'DM Sans',sans-serif;font-size:14px;
-  background:var(--cr);outline:none;transition:border-color .2s;
-}
-.search-wrap input:focus{border-color:var(--sf);}
-.s-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;}
-
+/* RESPONSIVE FOOD GRID */
 .food-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin-bottom:10px;
-  max-height:220px;
-  overflow-y:auto;
+  display:grid; 
+  grid-template-columns: repeat(2, 1fr); /* Mobile: 2 cols */
+  gap: 8px;
+  margin-bottom:12px; 
+  max-height:300px; 
+  overflow-y:auto; 
   padding-right:2px;
 }
-.food-grid::-webkit-scrollbar{width:3px;}
-.food-grid::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px;}
+@media(min-width:500px){ .food-grid{grid-template-columns:repeat(3,1fr);} } /* Large Phone */
+@media(min-width:900px){ .food-grid{grid-template-columns:repeat(4,1fr); max-height: 400px;} } /* Desktop */
+
+/* Custom scrollbar */
+.food-grid::-webkit-scrollbar {width: 4px;}
+.food-grid::-webkit-scrollbar-thumb {background: #ddd; border-radius: 4px;}
+
 .food-card{
-  border:2px solid var(--bd);border-radius:var(--radius-sm);
-  padding:7px 5px;cursor:pointer;text-align:center;
-  transition:all .18s;background:var(--cr);
-  user-select:none;touch-action:manipulation;
+  border:1.5px solid var(--bd);border-radius:var(--radius-sm);
+  padding:10px 6px;cursor:pointer;text-align:center;
+  transition:all .15s;background:var(--cr);
+  position: relative;
 }
-.food-card:hover{border-color:var(--sf2);background:#FFF3E8;transform:translateY(-1px);}
-.food-card.selected{border-color:var(--sf);background:#FFF0E0;box-shadow:0 0 0 3px rgba(232,103,27,.12);}
-.food-card .em{font-size:18px;display:block;margin-bottom:2px;}
-.food-card .fn{font-size:9.5px;font-weight:600;line-height:1.25;color:var(--tx);}
-.food-card .fp{font-size:9px;color:var(--gr);font-weight:500;margin-top:2px;}
-.food-card .fu{font-size:8.5px;color:var(--mu);}
+.food-card:active {transform: scale(0.96);}
+.food-card.selected{border-color:var(--sf);background:#FFF0E0;box-shadow:0 0 0 2px rgba(232,103,27,.15);}
+.food-card .em{font-size:26px;display:block;margin-bottom:6px;}
+.food-card .fn{font-size:12px;font-weight:700;line-height:1.25;color:var(--tx);height:2.5em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.food-card .fp{font-size:11px;color:var(--gr);font-weight:700;margin-top:4px;}
+.food-card .fib{font-size:10px;color:#8D6E63;}
 
-/* ── QTY CONTROLS ── */
-.qty-row{background:var(--cr);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:10px;border:1.5px solid var(--bd);}
-.qty-label{font-size:11px;color:var(--mu);margin-bottom:7px;font-weight:500;}
-.qty-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.qty-pm{
-  background:#fff;border:2px solid var(--bd);border-radius:8px;
-  width:36px;height:36px;font-size:20px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;transition:all .15s;flex-shrink:0;
-  touch-action:manipulation;user-select:none;
-}
-.qty-pm:hover,.qty-pm:active{background:var(--sf);color:#fff;border-color:var(--sf);}
-.qty-inp{
-  border:none;background:transparent;
-  font-family:'DM Sans',sans-serif;font-size:24px;font-weight:700;
-  width:60px;outline:none;color:var(--tx);text-align:center;
-}
-.qty-ul{font-size:12px;color:var(--mu);}
-.qbtns{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;width:100%;}
-.qb{
-  background:#fff;border:1.5px solid var(--bd);
-  border-radius:7px;padding:5px 10px;
-  font-size:11px;font-weight:600;cursor:pointer;
-  transition:all .15s;font-family:'DM Sans',sans-serif;
-  white-space:nowrap;touch-action:manipulation;
-}
-.qb:hover,.qb.qb-active{background:var(--sf);color:#fff;border-color:var(--sf);}
+/* ── QTY & PREVIEW ── */
+.prev-bar{margin-bottom:12px;background:linear-gradient(135deg,#F0FFF5,#E6F7EE);border:1.5px solid #B5DFC5;border-radius:var(--radius-sm);padding:10px 14px;display:none;}
+.prev-bar.vis{display:block;}
+.prev-bar .pn{font-size:14px;font-weight:700;color:var(--gr);margin-bottom:6px;}
+.prev-stats{display:flex;gap:12px;font-size:12px;color:var(--mu);flex-wrap: wrap;}
+.prev-stats strong{color:var(--tx);font-weight:700;}
 
-/* ── NUTRITION TIP ── */
+.qty-row{background:var(--cr);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px;border:1.5px solid var(--bd);}
+.qty-controls{display:flex;align-items:center;gap:10px;justify-content: center;}
+.qty-inp{border:none;background:transparent;font-size:24px;font-weight:700;width:70px;text-align:center;font-family:'DM Sans',sans-serif;color:var(--tx);}
+.qty-pm{width:36px;height:36px;border-radius:10px;border:2px solid var(--bd);background:#fff;font-weight:700;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--sf);}
+.qty-pm:active{background:var(--sf);color:#fff;border-color:var(--sf);}
+
+.qbtns{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom: 2px;}
+.qb{background:#fff;border:1.5px solid var(--bd);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.qb.qb-active{background:var(--sf);color:#fff;border-color:var(--sf);}
+
+/* ── TIPS BOX ── */
 .nutr-tip{
-  background:linear-gradient(135deg,#E8F5E9,#F1F8E9);
-  border:1.5px solid #A5D6A7;border-radius:var(--radius-sm);
-  padding:10px 12px;margin-top:8px;margin-bottom:8px;
-  font-size:11.5px;color:#1B4332;line-height:1.65;display:none;
+  background:linear-gradient(135deg,#FFF8E1,#FFF3E0);
+  border:1.5px solid #FFD54F; border-radius:var(--radius-sm);
+  padding:14px; margin-top:8px; margin-bottom:8px; display:none;
 }
 .nutr-tip.vis{display:block;}
-.nutr-tip-title{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#1A6B3C;margin-bottom:4px;}
+.nutr-tip-title{font-size:11px;font-weight:800;text-transform:uppercase;color:#E65100;margin-bottom:6px;letter-spacing:0.5px;}
+.nt-text{font-size:13px;color:#5D4037;line-height:1.5;}
 
-/* ── PREV BAR ── */
-.prev-bar{margin-bottom:9px;background:linear-gradient(135deg,#F0FFF5,#E6F7EE);border:1.5px solid #B5DFC5;border-radius:var(--radius-sm);padding:9px 12px;display:none;}
-.prev-bar.vis{display:block;}
-.prev-bar .pn{font-size:12.5px;font-weight:600;color:var(--gr);margin-bottom:2px;}
-.prev-stats{display:flex;gap:12px;flex-wrap:wrap;}
-.prev-stats span{font-size:11px;color:var(--mu);}
-.prev-stats strong{color:var(--tx);}
-
-/* ── ADD BUTTON ── */
 .add-btn{
-  width:100%;padding:13px;
-  background:linear-gradient(135deg,var(--sf),#C94A10);
+  width:100%;padding:15px; background:linear-gradient(135deg,var(--sf),#C94A10);
   color:#fff;border:none;border-radius:var(--radius-sm);
-  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;
-  cursor:pointer;transition:transform .15s,box-shadow .15s;
+  font-size:16px;font-weight:700;cursor:pointer;
   box-shadow:0 4px 14px rgba(232,103,27,.3);
-  touch-action:manipulation;
+  transition:transform 0.1s;
 }
-.add-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,103,27,.4);}
-.add-btn:active{transform:translateY(0);}
+.add-btn:active{transform:scale(0.98);}
 
-/* ── MY PLATE PANEL ── */
-.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.stat-box{background:var(--cr);border-radius:var(--radius-sm);padding:12px;border:1.5px solid var(--bd);}
-.stat-box .lbl{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--mu);margin-bottom:2px;}
-.stat-box .val{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1;}
+/* ── MY PLATE STATS ── */
+.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
+.stat-box{background:var(--cr);border-radius:var(--radius-sm);padding:12px 8px;border:1.5px solid var(--bd);text-align:center;}
+.stat-box .lbl{font-size:10px;text-transform:uppercase;color:var(--mu);font-weight:700;}
+.stat-box .val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1;margin-top:4px;}
 .stat-box .val.p{color:var(--gr);}
 .stat-box .val.c{color:var(--sf);}
-.stat-box .unt{font-size:10px;color:var(--mu);}
-.prog{margin-bottom:10px;}
-.prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--mu);margin-bottom:3px;}
-.bar-tr{height:7px;background:var(--bd);border-radius:4px;overflow:hidden;}
-.bar-fi{height:100%;border-radius:4px;transition:width .4s ease;}
-.bar-fi.p{background:linear-gradient(90deg,var(--gr),var(--gr2));}
-.bar-fi.c{background:linear-gradient(90deg,var(--sf),var(--sf2));}
-.ml-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-.ml-hdr span{font-size:12px;font-weight:600;}
-.clr-btn{font-size:10px;color:#CC3333;background:#FFF0F0;border:1.5px solid #FFCCCC;border-radius:7px;padding:4px 9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .15s;}
-.clr-btn:hover{background:#FFDDDD;}
-.ml-items{max-height:280px;overflow-y:auto;}
-.ml-items::-webkit-scrollbar{width:3px;}
-.ml-items::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px;}
-.ml-entry{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--bd);animation:sli .2s ease;}
-@keyframes sli{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
-.me-ic{font-size:18px;flex-shrink:0;}
+.stat-box .val.f{color:var(--fiber);}
+
+.ml-items{max-height:300px;overflow-y:auto;margin-top:10px;}
+.ml-entry{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed var(--bd);}
 .me-if{flex:1;min-width:0;}
-.me-if .mn{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.me-if .mnt{font-size:10px;color:var(--mu);}
-.me-nu{text-align:right;flex-shrink:0;}
-.me-nu .mp{font-size:12px;font-weight:700;color:var(--gr);}
-.me-nu .mk{font-size:10px;color:var(--mu);}
-.me-del{background:none;border:none;cursor:pointer;color:#ccc;font-size:14px;padding:3px 5px;border-radius:5px;transition:all .15s;}
-.me-del:hover{color:#CC3333;background:#FFF0F0;}
-.empty{text-align:center;padding:24px 0;color:var(--mu);}
-.empty .ei{font-size:32px;margin-bottom:8px;}
-.empty p{font-size:12px;line-height:1.6;}
+.me-nu{text-align:right;font-size:11px;}
+.me-del{background:none;border:none;color:#ccc;font-size:20px;cursor:pointer;padding:0 8px;display:flex;align-items:center;height:100%;}
+.me-del:active{color:red;}
 
-/* ── BMI TAB ── */
-.bmi-grid{display:flex;flex-direction:column;gap:var(--gap-md);}
-.bmi-form label{display:block;font-size:11.5px;font-weight:600;color:var(--mu);margin-bottom:5px;margin-top:12px;}
-.bmi-form label:first-of-type{margin-top:0;}
-.bmi-form input,.bmi-form select{width:100%;padding:10px 12px;border:1.5px solid var(--bd);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;background:var(--cr);outline:none;transition:border-color .2s;}
-.bmi-form input:focus,.bmi-form select:focus{border-color:var(--blu);}
-.bmi-calc-btn{margin-top:14px;width:100%;padding:13px;background:linear-gradient(135deg,var(--blu),#0D47A1);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(21,101,192,.3);touch-action:manipulation;}
-.bmi-calc-btn:hover{transform:translateY(-1px);}
-.bmi-result{display:none;}
-.bmi-result.vis{display:block;}
-.bmi-score-ring{text-align:center;padding:20px 0 12px;}
-.bmi-circle{width:130px;height:130px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:6px solid;}
-.bmi-circle .bval{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;line-height:1;}
-.bmi-circle .blab{font-size:11px;font-weight:600;margin-top:2px;}
-.bmi-cat{display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;}
-.bmi-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
-.bmi-met{background:var(--cr);border-radius:var(--radius-sm);padding:10px 12px;border:1.5px solid var(--bd);}
-.bmi-met .bm-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:var(--mu);margin-bottom:2px;}
-.bmi-met .bm-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--tx);}
-.bmi-met .bm-unit{font-size:10px;color:var(--mu);}
-.bmi-scale{margin-top:14px;}
-.bmi-scale-title{font-size:11.5px;font-weight:600;color:var(--mu);margin-bottom:7px;}
-.bmi-bar-wrap{position:relative;height:14px;border-radius:7px;overflow:hidden;background:linear-gradient(90deg,#2196F3 0%,#4CAF50 30%,#FF9800 60%,#F44336 100%);}
-.bmi-needle{position:absolute;top:-3px;width:4px;height:20px;background:#1C1C1C;border-radius:2px;transform:translateX(-50%);transition:left .6s ease;}
-.bmi-scale-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px;}
-.bmi-advice{margin-top:12px;background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:1.5px solid #A5D6A7;border-radius:var(--radius-sm);padding:12px 14px;}
-.bmi-advice .ba-title{font-size:12px;font-weight:700;color:var(--gr);margin-bottom:4px;}
-.bmi-advice p{font-size:12px;color:var(--tx);line-height:1.7;}
+/* ── GAP ANALYSIS SECTION ── */
+.gap-analysis-card{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border:2px solid var(--gr);padding:18px;border-radius:var(--radius-md);margin-bottom:14px;}
+.gap-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.gap-inp label{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--gr);display:block;margin-bottom:6px;}
+.gap-inp input, .gap-inp select{width:100%;padding:10px;border:1px solid #A5D6A7;border-radius:8px;font-family:inherit;font-size:16px;outline:none;background:#fff;}
+.gap-calc-btn{grid-column:span 2;background:var(--gr);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:15px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+.gap-result{display:none;margin-top:14px;padding-top:14px;border-top:1px dashed var(--gr);}
+.gap-result.vis{display:block;}
+.gap-msg{font-size:15px;font-weight:700;color:#1B5E20;margin-bottom:10px;}
+.gap-sug-list{display:flex;flex-direction:column;gap:8px;}
+.gap-sug-item{background:#fff;padding:12px;border-radius:10px;font-size:13px;display:flex;align-items:center;gap:12px;border:1px solid #A5D6A7;box-shadow:0 2px 5px rgba(0,0,0,0.05);}
 
-/* ── AMIT PANEL ── */
-.amit-panel{background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:2px solid #FFD54F;border-radius:var(--radius-md);padding:16px;margin-bottom:14px;}
-.amit-panel h3{font-family:'Playfair Display',serif;font-size:16px;color:#E65100;margin-bottom:10px;}
-.amit-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
-.amit-stat{background:#fff;border-radius:var(--radius-sm);padding:9px 10px;border:1.5px solid #FFD54F;text-align:center;}
-.amit-stat .as-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--mu);}
-.amit-stat .as-val{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#E65100;}
-.amit-stat .as-u{font-size:9.5px;color:var(--mu);}
-.amit-goals{background:#fff;border-radius:var(--radius-sm);padding:12px;border:1.5px solid #FFD54F;}
-.amit-goals h4{font-size:11.5px;font-weight:700;color:var(--tx);margin-bottom:8px;}
-.ag-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
-.ag-row:last-child{margin-bottom:0;}
-.ag-label{font-size:11.5px;width:100px;flex-shrink:0;color:var(--mu);}
-.ag-bar{flex:1;height:7px;background:var(--bd);border-radius:4px;overflow:hidden;}
-.ag-fill{height:100%;border-radius:4px;}
-.ag-val{font-size:11.5px;font-weight:700;color:var(--tx);width:55px;text-align:right;flex-shrink:0;}
+/* ── BUDGET PLANS ── */
+.budget-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+@media(min-width:600px){.budget-grid{grid-template-columns:1fr 1fr;}}
+.budget-card{border:2px solid var(--bd);border-radius:var(--radius-md);overflow:hidden;}
+.bc-hdr{padding:12px;color:#fff;font-weight:700;text-align:center;font-size:15px;}
+.bc-hdr.u120{background:linear-gradient(135deg,#00897B,#00695C);}
+.bc-hdr.u200{background:linear-gradient(135deg,#5E35B1,#4527A0);}
+.bc-body{padding:14px;background:#fff;}
+.bc-row{display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px dashed #eee;}
+.bc-total{margin-top:12px;padding-top:10px;border-top:2px solid #eee;font-weight:700;display:flex;justify-content:space-between;color:var(--tx);font-size:14px;}
 
-/* ── SUGGESTIONS TAB ── */
-.sug-tabs{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
-.diet-btn{padding:8px 16px;border-radius:25px;border:2px solid var(--bd);background:#fff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;color:var(--mu);touch-action:manipulation;}
-.diet-btn.active{background:var(--pur);color:#fff;border-color:var(--pur);}
-.sug-content{display:none;}
-.sug-content.vis{display:block;}
-.sug-section-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--gr);margin-bottom:10px;}
-.sug-cards{display:grid;grid-template-columns:1fr;gap:10px;}
-.sug-card{border-radius:var(--radius-md);overflow:hidden;border:1.5px solid var(--bd);background:#fff;}
-.sug-card-top{padding:12px 14px;background:linear-gradient(135deg,var(--cr),#FFF3E8);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;}
-.sug-em{font-size:28px;flex-shrink:0;}
-.sug-time{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--mu);margin-bottom:2px;}
-.sug-name{font-size:13.5px;font-weight:700;color:var(--tx);}
-.sug-prot{margin-left:auto;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gr);white-space:nowrap;flex-shrink:0;}
-.sug-items{padding:10px 14px;}
-.sug-items li{font-size:12px;color:var(--tx);padding:2.5px 0;list-style:none;}
-.sug-items li::before{content:"• ";color:var(--sf);font-weight:700;}
-.avoid-section{margin-top:14px;}
-.avoid-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
-.avoid-card{background:#FFF5F5;border:1.5px solid #FFCDD2;border-radius:var(--radius-sm);padding:9px 10px;display:flex;gap:8px;align-items:flex-start;}
-.avoid-em{font-size:18px;flex-shrink:0;}
-.avoid-name{font-size:11.5px;font-weight:700;color:#C62828;}
-.avoid-why{font-size:10.5px;color:var(--mu);margin-top:1px;line-height:1.4;}
-.warn-box{background:linear-gradient(135deg,#FFF3E0,#FFF8E1);border:1.5px solid #FFD54F;border-radius:var(--radius-sm);padding:12px 14px;margin-top:12px;font-size:12px;color:#5C4500;line-height:1.6;}
-.warn-box .wt{font-size:11px;font-weight:700;color:#E65100;margin-bottom:4px;}
-.tip-list{margin-top:12px;}
-.tip-row{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--bd);}
-.tip-row:last-child{border-bottom:none;}
-.tip-row .tip-num{width:22px;height:22px;border-radius:50%;background:var(--pur);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.tip-row p{font-size:12px;line-height:1.6;color:var(--tx);}
+/* ── BMI ── */
+.bmi-input-group{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.bmi-res-box{text-align:center;padding:18px;background:var(--cr);border-radius:var(--radius-sm);margin-top:12px;display:none;}
+.bmi-res-box.vis{display:block;}
+.bmi-val{font-size:36px;font-weight:900;color:var(--blu);font-family:'Playfair Display',serif;}
 
-/* ── DIET PLAN TAB ── */
-.plan-intro{background:#fff;border-radius:var(--radius-md);padding:16px;border:1px solid var(--bd);margin-bottom:14px;box-shadow:var(--shadow-sm);}
-.plan-intro p{font-size:13px;color:var(--mu);line-height:1.7;}
-.plan-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:14px;}
-.plan-card{border-radius:var(--radius-md);overflow:hidden;border:2px solid var(--bd);background:#fff;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-sm);touch-action:manipulation;}
-.plan-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
-.plan-card.sel{border-color:var(--sf);box-shadow:0 0 0 3px rgba(232,103,27,.15),0 6px 20px rgba(0,0,0,.1);}
-.plan-card-hdr{padding:14px 14px 8px;}
-.plan-badge{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 9px;border-radius:20px;margin-bottom:6px;}
-.plan-card-hdr h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:3px;}
-.plan-card-hdr p{font-size:11px;color:var(--mu);line-height:1.5;}
-.plan-total{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;background:var(--cr);border-top:1px solid var(--bd);}
-.plan-total-num{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;}
-.plan-total-lbl{font-size:10px;color:var(--mu);}
-.plan-detail{background:#fff;border-radius:var(--radius-md);border:1px solid var(--bd);box-shadow:var(--shadow-sm);overflow:hidden;display:none;}
-.plan-detail.vis{display:block;}
-.plan-detail-hdr{padding:14px 18px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
-.plan-detail-hdr h2{font-family:'Playfair Display',serif;font-size:17px;}
-.close-det{background:none;border:1.5px solid var(--bd);border-radius:8px;padding:5px 11px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;transition:all .15s;touch-action:manipulation;}
-.close-det:hover{background:var(--cr);}
-.meal-row{display:grid;grid-template-columns:60px 1fr 65px;gap:8px;align-items:start;padding:12px 16px;border-bottom:1px solid var(--bd);}
-.meal-row:last-child{border-bottom:none;}
-.meal-time{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;}
-.meal-em{font-size:18px;display:block;margin-bottom:2px;}
-.meal-item-row{font-size:12px;color:var(--tx);padding:2px 0;}
-.meal-item-row::before{content:"• ";color:var(--sf);font-weight:700;}
-.meal-p{text-align:right;font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--gr);}
-.meal-p .kc{font-family:'DM Sans',sans-serif;font-size:9px;color:var(--mu);font-weight:400;display:block;}
-.pro-tip{background:linear-gradient(135deg,#FFFBEA,#FFF3CC);border:1.5px solid #FFD966;border-radius:var(--radius-sm);padding:12px 14px;margin:12px 16px 16px;}
-.pro-tip .tl{font-size:10px;font-weight:700;color:#B8860B;text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px;}
-.pro-tip p{font-size:12px;color:#5C4500;line-height:1.6;}
-.plan-sum{display:flex;gap:16px;padding:12px 16px;background:var(--cr);border-top:1px solid var(--bd);flex-wrap:wrap;}
-.psum-item .ps-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:var(--mu);}
-.psum-item .ps-val{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--gr);}
-.pick-guide{background:#fff;border-radius:var(--radius-md);padding:16px;border:1px solid var(--bd);margin-top:14px;box-shadow:var(--shadow-sm);}
-.pick-guide h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--gr);margin-bottom:10px;}
-.pick-row{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--bd);}
-.pick-row:last-child{border-bottom:none;}
-.pick-tag{background:var(--cr);border:1.5px solid var(--bd);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;white-space:nowrap;}
-.pick-row p{font-size:12px;color:var(--mu);line-height:1.5;}
-
-/* ── TIPS TAB ── */
-.tips-header{background:linear-gradient(135deg,#00695C,#004D40);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:14px;color:#fff;position:relative;overflow:hidden;}
-.tips-header::before{content:'⏰';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:70px;opacity:.1;}
-.tips-header h2{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px;}
-.tips-header p{font-size:12px;opacity:.85;}
-.tips-grid{display:flex;flex-direction:column;gap:var(--gap-md);margin-bottom:14px;}
-.timeline{background:#fff;border-radius:var(--radius-md);border:1px solid var(--bd);overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:14px;}
-.timeline-header{padding:13px 16px;background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border-bottom:1px solid #90CAF9;}
-.timeline-header h3{font-family:'Playfair Display',serif;font-size:15px;color:#0D47A1;margin-bottom:2px;}
-.timeline-header p{font-size:11.5px;color:#1565C0;opacity:.8;}
-.tl-item{display:flex;border-bottom:1px solid var(--bd);}
-.tl-item:last-child{border-bottom:none;}
-.tl-time-col{width:80px;flex-shrink:0;padding:12px 8px;background:linear-gradient(180deg,#F3F4F6,#EEF0F2);border-right:1px solid var(--bd);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-.tl-clock{font-size:12px;font-weight:700;color:#0D47A1;}
-.tl-gap-badge{margin-top:3px;background:#E8F5E9;color:var(--gr);font-size:8.5px;font-weight:700;border-radius:10px;padding:2px 6px;}
-.tl-dot{width:8px;height:8px;border-radius:50%;margin-bottom:3px;}
-.tl-content{flex:1;padding:12px 14px;}
-.tl-meal-name{font-size:12.5px;font-weight:700;margin-bottom:2px;}
-.tl-meal-desc{font-size:11px;color:var(--mu);line-height:1.6;}
-.tl-tags{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap;}
-.tl-tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:10px;}
-.goal-compare{display:flex;flex-direction:column;gap:var(--gap-md);margin-bottom:14px;}
-.goal-card{border-radius:var(--radius-md);overflow:hidden;border:2px solid;box-shadow:var(--shadow-md);}
-.goal-card-lean{border-color:#1565C0;}
-.goal-card-bulk{border-color:#B71C1C;}
-.goal-card-hdr{padding:14px 16px;}
-.goal-card-lean .goal-card-hdr{background:linear-gradient(135deg,#1565C0,#0D47A1);}
-.goal-card-bulk .goal-card-hdr{background:linear-gradient(135deg,#B71C1C,#7F0000);}
-.goal-card-hdr .gc-em{font-size:28px;margin-bottom:5px;}
-.goal-card-hdr h3{font-family:'Playfair Display',serif;font-size:17px;color:#fff;margin-bottom:2px;}
-.goal-card-hdr p{font-size:11px;color:rgba(255,255,255,.8);}
-.goal-card-body{background:#fff;padding:14px 16px;}
-.goal-metric{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--bd);}
-.goal-metric:last-child{border-bottom:none;}
-.gm-label{font-size:11.5px;color:var(--mu);font-weight:500;}
-.gm-val{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;}
-.lean-val{color:#1565C0;}
-.bulk-val{color:#B71C1C;}
-.gm-note{font-size:9.5px;color:var(--mu);margin-top:1px;}
-.maintain-card{background:#fff;border-radius:var(--radius-md);border:2px solid #7B1FA2;box-shadow:var(--shadow-md);overflow:hidden;margin-bottom:14px;}
-.maintain-hdr{background:linear-gradient(135deg,#7B1FA2,#4A148C);padding:14px 16px;}
-.maintain-hdr .gc-em{font-size:28px;margin-bottom:5px;}
-.maintain-hdr h3{font-family:'Playfair Display',serif;font-size:17px;color:#fff;margin-bottom:2px;}
-.maintain-hdr p{font-size:11px;color:rgba(255,255,255,.8);}
-.maintain-body{padding:14px 16px;}
-.maintain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;}
-.maintain-stat{background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border:1.5px solid #CE93D8;border-radius:var(--radius-sm);padding:10px 12px;text-align:center;}
-.maintain-stat .ms-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:#7B1FA2;}
-.maintain-stat .ms-val{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#4A148C;}
-.maintain-stat .ms-unit{font-size:9.5px;color:var(--mu);}
-.comp-table-wrap{background:#fff;border-radius:var(--radius-md);border:1px solid var(--bd);overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow-sm);}
-.comp-table{width:100%;border-collapse:collapse;font-size:11.5px;}
-.comp-table th{padding:9px 10px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.7px;font-weight:700;}
-.comp-table th:first-child{background:#F5F5F5;color:var(--mu);}
-.comp-table th.lean-hd{background:#1565C0;color:#fff;}
-.comp-table th.bulk-hd{background:#B71C1C;color:#fff;}
-.comp-table th.maint-hd{background:#7B1FA2;color:#fff;}
-.comp-table td{padding:8px 10px;border-top:1px dashed var(--bd);}
-.comp-table td:first-child{font-weight:600;font-size:11px;color:var(--tx);background:#FAFAFA;}
-.comp-table td.lean-cell{color:#1565C0;font-weight:600;}
-.comp-table td.bulk-cell{color:#B71C1C;font-weight:600;}
-.comp-table td.maint-cell{color:#7B1FA2;font-weight:600;}
-.comp-table tr:hover td{background:#FEF6EC;}
-.comp-table tr:hover td:first-child{background:#FEF0E0;}
-.muscle-tips-section{background:#fff;border-radius:var(--radius-md);border:1px solid var(--bd);overflow:hidden;box-shadow:var(--shadow-sm);}
-.mts-header{padding:13px 16px;background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border-bottom:1px solid #FFE082;}
-.mts-header h3{font-family:'Playfair Display',serif;font-size:15px;color:#E65100;}
-.tip-accordion{padding:11px 16px;border-bottom:1px dashed var(--bd);display:flex;gap:9px;align-items:flex-start;}
-.tip-accordion:last-child{border-bottom:none;}
-.ta-icon{font-size:20px;flex-shrink:0;}
-.ta-title{font-size:12.5px;font-weight:700;margin-bottom:2px;color:var(--tx);}
-.ta-body{font-size:11.5px;color:var(--mu);line-height:1.7;}
-.ta-highlight{display:inline-block;background:var(--cr);border:1px solid var(--bd);border-radius:6px;padding:2px 7px;font-size:10.5px;font-weight:700;margin-top:4px;color:var(--sf);}
-
-/* ── MY DIET TAB ── */
-.mydet-header{background:linear-gradient(135deg,#1A6B3C,#2D9158);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:14px;color:#fff;position:relative;overflow:hidden;}
-.mydet-header::before{content:'🥗';position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:80px;opacity:.1;}
-.mydet-header h2{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px;}
-.mydet-header p{font-size:12px;opacity:.85;}
-.amit-diet-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1A6B3C;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
-.amit-diet-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
-.amit-diet-card{background:#fff;border-radius:var(--radius-sm);border:2px solid #A5D6A7;padding:12px 14px;position:relative;overflow:hidden;}
-.amit-diet-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1A6B3C,#2D9158);}
-.adc-time{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:#1A6B3C;margin-bottom:4px;}
-.adc-name{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:7px;}
-.adc-items{list-style:none;font-size:11.5px;color:var(--mu);line-height:1.9;}
-.adc-items li::before{content:"✓ ";color:#1A6B3C;font-weight:700;}
-.adc-protein{display:inline-flex;align-items:center;gap:5px;margin-top:8px;background:#E8F5E9;border:1.5px solid #A5D6A7;border-radius:20px;padding:4px 11px;font-size:11px;font-weight:700;color:#1A6B3C;}
-.adc-warn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;background:#FFF3E0;border:1.5px solid #FFCC80;border-radius:20px;padding:4px 11px;font-size:11px;font-weight:600;color:#E65100;}
-.amit-total-bar{background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid #66BB6A;border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
-.atb-item{text-align:center;}
-.atb-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:#1A6B3C;margin-bottom:2px;}
-.atb-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1A6B3C;}
-.atb-unit{font-size:9.5px;color:var(--mu);}
-.atb-divider{width:1px;height:36px;background:#A5D6A7;flex-shrink:0;}
-.atb-note{flex:1;min-width:160px;font-size:11.5px;color:#2D6A4F;line-height:1.6;}
-.prot-dist{background:#fff;border-radius:var(--radius-sm);border:1.5px solid var(--bd);padding:14px;margin-bottom:16px;}
-.prot-dist-title{font-size:12px;font-weight:700;color:var(--tx);margin-bottom:10px;}
-.pdist-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.pdist-label{font-size:10.5px;color:var(--mu);width:110px;flex-shrink:0;}
-.pdist-track{flex:1;height:11px;background:var(--bd);border-radius:5px;overflow:hidden;}
-.pdist-fill{height:100%;border-radius:5px;}
-.pdist-val{font-size:11px;font-weight:700;color:#1A6B3C;width:36px;text-align:right;flex-shrink:0;}
-.pdist-warn{color:#E65100!important;}
-.calc-section{background:#fff;border-radius:var(--radius-md);border:1.5px solid var(--bd);padding:16px;margin-bottom:16px;box-shadow:var(--shadow-sm);}
-.calc-section-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--gr);margin-bottom:5px;}
-.calc-section-sub{font-size:11.5px;color:var(--mu);margin-bottom:14px;line-height:1.5;}
-.calc-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
-.calc-inp-group label{display:block;font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;}
-.calc-inp-group input,.calc-inp-group select{width:100%;padding:9px 11px;border:1.5px solid var(--bd);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13.5px;background:var(--cr);outline:none;transition:border-color .2s;}
-.calc-inp-group input:focus,.calc-inp-group select:focus{border-color:var(--gr);}
-.calc-btn{width:100%;padding:13px;background:linear-gradient(135deg,#1A6B3C,#2D9158);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(26,107,60,.3);margin-bottom:16px;touch-action:manipulation;}
-.calc-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,107,60,.4);}
-.calc-results{display:none;}
-.calc-results.vis{display:block;}
-.calc-result-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--tx);margin-bottom:12px;}
-.calc-stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;}
-.calc-stat{background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:1.5px solid #A5D6A7;border-radius:var(--radius-sm);padding:10px;text-align:center;}
-.calc-stat .cs-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:#1A6B3C;margin-bottom:2px;}
-.calc-stat .cs-val{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:#1A6B3C;}
-.calc-stat .cs-unit{font-size:9.5px;color:var(--mu);}
-.sug-plans{display:flex;flex-direction:column;gap:12px;}
-.sug-plan{border-radius:var(--radius-md);border:2px solid var(--bd);overflow:hidden;background:#fff;}
-.sug-plan-hdr{padding:12px 14px;display:flex;align-items:center;gap:10px;}
-.sp-num{width:30px;height:30px;border-radius:50%;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.sp-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;}
-.sp-sub{font-size:10.5px;opacity:.8;margin-top:1px;}
-.sug-plan-body{padding:12px 14px;}
-.sp-meals{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
-.sp-meal{background:var(--cr);border-radius:var(--radius-sm);padding:9px 11px;border:1px solid var(--bd);}
-.sp-meal-time{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--mu);margin-bottom:2px;}
-.sp-meal-items{font-size:11px;color:var(--tx);line-height:1.7;}
-.sp-meal-items li{list-style:none;}
-.sp-meal-items li::before{content:"• ";color:#1A6B3C;font-weight:700;}
-.sp-meal-prot{font-size:10px;font-weight:700;color:#1A6B3C;margin-top:3px;}
-.sp-total-row{display:flex;flex-wrap:wrap;gap:8px;padding:8px 0;border-top:1px dashed var(--bd);}
-.sp-total-item{font-size:11px;font-weight:600;color:var(--tx);}
-.sp-total-item span{color:#1A6B3C;font-weight:700;}
-.sp-key-change{background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1.5px solid #FFD54F;border-radius:var(--radius-sm);padding:9px 11px;font-size:11px;color:#5C4500;line-height:1.6;}
-.sp-key-change strong{color:#E65100;}
-
-
-/* ── SUG TAB HEADER + SELECTOR ── */
-.sug-header{background:linear-gradient(135deg,var(--pur),#4A148C);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:14px;color:#fff;position:relative;overflow:hidden;}
-.sug-header::before{content:'💡';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:70px;opacity:.1;}
-.sug-header h2{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px;}
-.sug-header p{font-size:12px;opacity:.85;}
-.diet-selector{display:flex;gap:7px;margin-bottom:14px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
-.diet-selector::-webkit-scrollbar{display:none;}
-.diet-btn{padding:9px 18px;border-radius:25px;border:2px solid var(--bd);background:#fff;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .18s;color:var(--mu);white-space:nowrap;flex-shrink:0;touch-action:manipulation;}
-.diet-btn.active{background:var(--pur);color:#fff;border-color:var(--pur);}
-.diet-btn:hover:not(.active){border-color:var(--pur);color:var(--pur);}
-.sug-content{display:none;}
-.sug-content.vis{display:block;}
-.sug-section{background:#fff;border-radius:var(--radius-md);padding:var(--p-card);border:1px solid var(--bd);box-shadow:var(--shadow-sm);margin-bottom:12px;}
-
-/* ── TOAST ── */
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gr);color:#fff;padding:10px 20px;border-radius:30px;font-size:13px;font-weight:500;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:999;pointer-events:none;white-space:nowrap;}
+/* Toast */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#333;color:#fff;padding:12px 24px;border-radius:30px;font-size:14px;font-weight:600;transition:transform .3s;z-index:999;box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
 .toast.show{transform:translateX(-50%) translateY(0);}
-
-/* ═══════════════════════════════════════
-   TABLET — 600px+
-═══════════════════════════════════════ */
-@media(min-width:600px){
-  body{padding:14px 14px 90px;}
-  .hdr{padding:18px 22px;}
-  .hdr-icon{font-size:40px;}
-  .hdr-text p{display:block;}
-  .tab-btn{padding:8px 15px;font-size:12.5px;}
-  .card{padding:18px;}
-  --p-card:18px;
-
-  /* Calculator: side by side on tablet */
-  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-md);}
-  .food-grid{grid-template-columns:repeat(3,1fr);max-height:260px;}
-  .sug-cards{grid-template-columns:repeat(2,1fr);}
-  .avoid-grid{grid-template-columns:repeat(3,1fr);}
-  .plan-cards{display:grid;grid-template-columns:repeat(2,1fr);}
-  .amit-diet-grid{display:grid;grid-template-columns:repeat(2,1fr);}
-  .bmi-grid{display:grid;grid-template-columns:1fr 1fr;}
-  .tips-grid{display:grid;grid-template-columns:1fr 1fr;}
-  .goal-compare{display:grid;grid-template-columns:1fr 1fr;}
-  .calc-stats-row{grid-template-columns:repeat(3,1fr);}
-  .sp-meals{display:grid;grid-template-columns:repeat(2,1fr);}
-  .calc-inputs{grid-template-columns:repeat(3,1fr);}
-  .maintain-grid{grid-template-columns:repeat(3,1fr);}
-  .amit-stats{grid-template-columns:repeat(4,1fr);}
-  .tl-time-col{width:90px;}
-}
-
-/* ═══════════════════════════════════════
-   DESKTOP — 900px+
-═══════════════════════════════════════ */
-@media(min-width:900px){
-  body{padding:20px 24px 60px;}
-  .hdr{padding:22px 28px;border-radius:22px;}
-  .hdr-icon{font-size:44px;}
-  .hdr-text h1{font-size:26px;}
-  .hdr-text p{font-size:12.5px;}
-  .tab-btn{padding:9px 18px;font-size:13px;}
-  --p-card:22px;
-  .card{padding:22px;border-radius:18px;}
-  .sec-title{font-size:17px;}
-
-  /* Calculator: left panel wider */
-  .calc-grid{grid-template-columns:1.1fr 0.9fr;gap:20px;}
-  .food-grid{grid-template-columns:repeat(4,1fr);max-height:280px;}
-  .sug-cards{grid-template-columns:repeat(2,1fr);gap:14px;}
-  .avoid-grid{grid-template-columns:repeat(4,1fr);}
-  .plan-cards{grid-template-columns:repeat(3,1fr);gap:16px;}
-  .amit-diet-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
-  .calc-stats-row{grid-template-columns:repeat(3,1fr);gap:12px;}
-  .sp-meals{grid-template-columns:repeat(2,1fr);gap:12px;}
-  .calc-inputs{grid-template-columns:repeat(3,1fr);}
-  .maintain-grid{grid-template-columns:repeat(4,1fr);}
-  .amit-stats{grid-template-columns:repeat(5,1fr);}
-  .ml-items{max-height:340px;}
-  .food-grid{max-height:300px;}
-
-  /* Bigger fonts on desktop */
-  .food-card .em{font-size:22px;}
-  .food-card .fn{font-size:10.5px;}
-  .sug-name{font-size:14.5px;}
-  .sug-items li{font-size:12.5px;}
-  .plan-card-hdr h3{font-size:17px;}
-  .meal-row{grid-template-columns:80px 1fr 75px;padding:14px 20px;}
-  .tl-time-col{width:100px;}
-  .bmi-circle{width:140px;height:140px;}
-}
-
-/* ═══════════════════════════════════════
-   WIDE DESKTOP — 1200px+
-═══════════════════════════════════════ */
-@media(min-width:1200px){
-  body{padding:24px 32px 60px;}
-  .tab-nav,.tab-panel,.hdr{max-width:1200px;}
-  .calc-grid{grid-template-columns:1.2fr 0.8fr;gap:24px;}
-  .plan-cards{grid-template-columns:repeat(3,1fr);}
-  .sp-meals{grid-template-columns:repeat(3,1fr);}
-  .calc-inputs{grid-template-columns:repeat(3,1fr);}
-}
-
-/* ── TOUCH / ACCESSIBILITY ── */
-@media(hover:none){
-  .food-card:hover{transform:none;}
-  .plan-card:hover{transform:none;}
-  .add-btn:hover{transform:none;}
-}
-button{-webkit-appearance:none;appearance:none;}
-input[type=number]{-moz-appearance:textfield;}
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="hdr">
-  <div class="hdr-icon">🍱</div>
+  <div class="hdr-icon">🥗</div>
   <div class="hdr-text">
-    <h1>Amit's Indian Nutrition Hub</h1>
-    <p>Full nutrition tracking · BMI calculator · Smart diet suggestions · Meal timing & body goal guides</p>
-  </div>
-  <div class="amit-badge">
-    <div class="aname">👤 Amit</div>
-    <div class="ainfo">74kg · 5'10 · Active</div>
+    <h1>Amit's Nutrition Hub</h1>
+    <p>Track. Analyze. Build Muscle.</p>
   </div>
 </div>
 
-<!-- TABS -->
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('calc',this)">🥗 Calculator</button>
-  <button class="tab-btn" onclick="switchTab('diet',this)">📋 Diet Plans</button>
-  <button class="tab-btn sug-tab" onclick="switchTab('sug',this)">💡 Suggestions</button>
-  <button class="tab-btn bmi-tab" onclick="switchTab('bmi',this)">⚖️ BMI Calculator</button>
-  <button class="tab-btn tips-tab" onclick="switchTab('tips',this)">🕐 Timing & Goals</button>
-  <button class="tab-btn" id="compare-tab-btn" onclick="switchTab('compare',this)" style="background:#fff;border-color:#1A6B3C;color:#1A6B3C;">🥗 My Diet</button>
+<div class="tab-nav-container">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('calc',this)">🍽️ Plate Calc</button>
+    <button class="tab-btn" onclick="switchTab('diet',this)">📊 My Diet & Analysis</button>
+    <button class="tab-btn" data-t="budget" onclick="switchTab('budget',this)">💰 Budget Diets</button>
+    <button class="tab-btn" data-t="bmi" onclick="switchTab('bmi',this)">⚖️ BMI</button>
+    <button class="tab-btn" data-t="timing" onclick="switchTab('timing',this)">⏰ Timing</button>
+  </div>
 </div>
 
-<!-- ============ CALCULATOR ============ -->
+<!-- ============ CALCULATOR TAB ============ -->
 <div class="tab-panel active" id="tab-calc">
   <div class="calc-grid">
+    <!-- LEFT: Food Selector -->
     <div class="card">
-      <div class="sec-title">🥘 Choose Food</div>
+      <div class="sec-title">🥘 Build Your Plate</div>
       <div class="search-wrap">
         <span class="s-ico">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search any food item..." oninput="filterFoods()"/>
+        <input type="text" id="searchInput" placeholder="Search (e.g. Rajma, Banana)..." oninput="filterFoods()"/>
       </div>
       <div class="cat-scroll" id="catScroll"></div>
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--mu);margin-bottom:5px;">⚡ Quick Pick</div>
-      <div class="quick-foods" id="quickFoods"></div>
+      
+      <!-- GRID: RESPONSIVE COLUMNS -->
       <div class="food-grid" id="foodGrid"></div>
+
+      <!-- Preview Selected Item -->
       <div class="prev-bar" id="prevBar">
         <div class="pn" id="prevName"></div>
         <div class="prev-stats">
-          <span>Protein: <strong id="prevP">—</strong></span>
-          <span>Calories: <strong id="prevC">—</strong></span>
-          <span id="prevNote" style="font-style:italic;font-size:10.5px;color:var(--mu)"></span>
+          <span>Prot: <strong id="prevP">0g</strong></span>
+          <span>Cal: <strong id="prevC">0</strong></span>
+          <span>Fib: <strong id="prevF">0g</strong></span>
         </div>
       </div>
+
+      <!-- Qty Controls -->
       <div class="qty-row">
-        <div class="qty-label" id="qtyLabel">Quantity (grams)</div>
         <div class="qty-controls">
-          <button class="qty-pm" id="qtyMinus" type="button">−</button>
-          <input type="number" class="qty-inp" id="weightInput" value="100" min="1"/>
-          <span class="qty-ul" id="qtyUL">g</span>
-          <button class="qty-pm" id="qtyPlus" type="button">+</button>
-          <div class="qbtns" id="quickBtns"></div>
+          <button class="qty-pm" onclick="adjQty(-1)">−</button>
+          <input type="number" class="qty-inp" id="weightInput" value="100"/>
+          <span style="font-size:12px;color:var(--mu);width:30px" id="qtyUnit">g</span>
+          <button class="qty-pm" onclick="adjQty(1)">+</button>
         </div>
+        <div class="qbtns" id="quickBtns"></div>
       </div>
+
+      <!-- Nutrition Tip -->
       <div class="nutr-tip" id="nutrTip">
-        <div class="nutr-tip-title">💡 Nutrition Tip</div>
-        <span id="nutrTipText"></span>
+        <div class="nutr-tip-title">💡 Why it's nutritious</div>
+        <div class="nt-text" id="nutrTipText"></div>
       </div>
-      <button class="add-btn" onclick="addToMeal()">+ Add to My Plate</button>
+
+      <button class="add-btn" onclick="addToMeal()">+ Add to Plate</button>
     </div>
 
+    <!-- RIGHT: My Plate Summary -->
     <div class="card">
-      <div class="sec-title">📊 My Plate</div>
+      <div class="sec-title">🍽️ Current Plate</div>
       <div class="stats-row">
         <div class="stat-box">
-          <div class="lbl">Total Protein</div>
+          <div class="lbl">Protein</div>
           <div class="val p" id="totalP">0</div>
-          <div class="unt">grams</div>
+          <div class="lbl">grams</div>
         </div>
         <div class="stat-box">
-          <div class="lbl">Total Calories</div>
+          <div class="lbl">Calories</div>
           <div class="val c" id="totalC">0</div>
-          <div class="unt">kcal</div>
+          <div class="lbl">kcal</div>
+        </div>
+        <div class="stat-box">
+          <div class="lbl">Fiber</div>
+          <div class="val f" id="totalF">0</div>
+          <div class="lbl">grams</div>
         </div>
       </div>
-      <div class="prog">
-        <div class="prog-lbl"><span>Protein (Goal: 60g)</span><span id="pPct">0%</span></div>
-        <div class="bar-tr"><div class="bar-fi p" id="pBar" style="width:0%"></div></div>
-      </div>
-      <div class="prog" style="margin-bottom:14px">
-        <div class="prog-lbl"><span>Calories (Goal: 2000 kcal)</span><span id="cPct">0%</span></div>
-        <div class="bar-tr"><div class="bar-fi c" id="cBar" style="width:0%"></div></div>
-      </div>
-      <div class="ml-hdr">
-        <span>Items Added</span>
-        <button class="clr-btn" onclick="clearMeal()">🗑 Clear All</button>
-      </div>
+
       <div class="ml-items" id="mealItems">
-        <div class="empty"><div class="ei">🍽️</div><p>Your plate is empty.<br/>Select a food and add it!</p></div>
+        <div style="text-align:center;padding:30px;color:var(--mu);font-size:13px">
+          Your plate is empty.<br>Select a food to start.
+        </div>
       </div>
+
+      <!-- ANALYZE BUTTON -->
+      <button class="add-btn" id="analyzeBtn" onclick="analyzeAndLog()" style="display:none;margin-top:14px;background:#1A6B3C;">
+        📝 Analyze & Calculate Gap
+      </button>
     </div>
   </div>
 </div>
 
-<!-- ============ DIET PLANS ============ -->
+<!-- ============ MY DIET & ANALYSIS TAB ============ -->
 <div class="tab-panel" id="tab-diet">
-  <div class="plan-intro">
-    <div class="sec-title">🥗 Choose Your Diet Plan</div>
-    <p>Three expert-crafted Indian diet plans built to maximize protein absorption. Click any plan card to see the full daily menu, timings, and pro tips.</p>
-  </div>
-  <div class="plan-cards" id="planCards"></div>
-  <div class="plan-detail" id="planDetail">
-    <div class="plan-detail-hdr">
-      <h2 id="detailTitle"></h2>
-      <button class="close-det" onclick="closePlanDetail()">✕ Close</button>
+  
+  <div class="card">
+    <div class="sec-title">📅 Meal Analysis Log</div>
+    <div id="dailyLogContainer" style="margin-bottom:10px">
+      <div style="text-align:center;color:var(--mu);font-size:13px;padding:15px;">No meals logged yet. Go to Plate Calc to add.</div>
     </div>
-    <div id="detailMeals"></div>
-    <div class="plan-sum">
-      <div class="psum-item"><div class="ps-lbl">Daily Protein</div><div class="ps-val" id="detailProtein"></div></div>
+    <div style="border-top:1px dashed var(--bd);padding-top:12px;display:flex;justify-content:space-between;font-weight:700;font-size:14px;">
+      <span>Total Logged Protein:</span>
+      <span style="color:var(--gr)" id="logTotalP">0g</span>
     </div>
-    <div class="pro-tip"><div class="tl">💡 Pro Tip</div><p id="detailTip"></p></div>
   </div>
-  <div class="pick-guide">
-    <h3>Which Plan Is Right For You?</h3>
-    <div class="pick-row"><span class="pick-tag">Option 1</span><p>Pick <strong>Vegetarian</strong> if you have time to cook beans/legumes and prefer plant-based eating.</p></div>
-    <div class="pick-row"><span class="pick-tag">Option 2</span><p>Pick <strong>Non-Veg Muscle</strong> for fastest muscle-building results — chicken &amp; fish have the highest bioavailable protein.</p></div>
-    <div class="pick-row"><span class="pick-tag">Option 3</span><p>Pick <strong>Eggetarian</strong> if you're busy — eggs and shakes take under 10 minutes.</p></div>
+
+  <!-- GAP ANALYSIS -->
+  <div class="gap-analysis-card">
+    <div class="sec-title" style="color:#1B5E20">🎯 Personalized Protein Gap</div>
+    <div class="gap-form">
+      <div class="gap-inp">
+        <label>Your Weight (kg)</label>
+        <input type="number" id="gapWeight" placeholder="e.g. 70" value="70">
+      </div>
+      <div class="gap-inp">
+        <label>Diet Type</label>
+        <select id="gapDiet">
+          <option value="Non-Veg">Non-Veg</option>
+          <option value="Veg">Vegetarian</option>
+          <option value="Egg">Eggetarian</option>
+        </select>
+      </div>
+      <button class="gap-calc-btn" onclick="calcGap()">Calculate My Protein Gap</button>
+    </div>
+
+    <div class="gap-result" id="gapResult">
+      <div class="gap-msg" id="gapMsg"></div>
+      <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:8px;text-transform:uppercase;">Eat these to hit your goal:</div>
+      <div class="gap-sug-list" id="gapSugList"></div>
+    </div>
   </div>
 </div>
 
-<!-- ============ SUGGESTIONS ============ -->
-<div class="tab-panel" id="tab-sug">
-  <div class="sug-header">
-    <h2>💡 Smart Diet Suggestions</h2>
-    <p>Personalized food suggestions to complete your daily nutrition based on your diet type</p>
+<!-- ============ BUDGET DIETS TAB ============ -->
+<div class="tab-panel" id="tab-budget">
+  <div class="card">
+    <div class="sec-title">💰 High Protein Budget Plans</div>
+    <p style="font-size:13px;color:var(--mu);margin-bottom:12px">Optimized for maximum protein per rupee.</p>
+    <div style="display:flex;gap:10px;margin-bottom:16px;justify-content:center;">
+      <button class="cat-chip active" onclick="renderBudget('Veg', this)">Veg</button>
+      <button class="cat-chip" onclick="renderBudget('Egg', this)">Eggetarian</button>
+      <button class="cat-chip" onclick="renderBudget('Non-Veg', this)">Non-Veg</button>
+    </div>
+    
+    <div class="budget-grid" id="budgetContainer">
+      <!-- Injected by JS -->
+    </div>
   </div>
-  <div class="diet-selector">
-    <button class="diet-btn veg active" onclick="selectDiet('veg',this)">🥦 Vegetarian</button>
-    <button class="diet-btn nonveg" onclick="selectDiet('nonveg',this)">🍗 Non-Vegetarian</button>
-    <button class="diet-btn egg" onclick="selectDiet('egg',this)">🥚 Eggetarian</button>
-  </div>
-  <div id="sugContent"></div>
 </div>
 
-<!-- ============ BMI ============ -->
+<!-- ============ BMI CALCULATOR TAB ============ -->
 <div class="tab-panel" id="tab-bmi">
-  <div class="amit-panel">
-    <h3>👤 Amit's Nutrition Profile</h3>
-    <div class="amit-stats">
-      <div class="amit-stat"><div class="as-lbl">Weight</div><div class="as-val">74</div><div class="as-u">kg</div></div>
-      <div class="amit-stat"><div class="as-lbl">Height</div><div class="as-val">5'10</div><div class="as-u">177.8 cm</div></div>
-      <div class="amit-stat"><div class="as-lbl">BMI</div><div class="as-val">23.4</div><div class="as-u">Normal &#x2705;</div></div>
-      <div class="amit-stat"><div class="as-lbl">Daily Cal Goal</div><div class="as-val">2683</div><div class="as-u">kcal</div></div>
-      <div class="amit-stat"><div class="as-lbl">Protein Goal</div><div class="as-val">133</div><div class="as-u">g/day</div></div>
-      <div class="amit-stat"><div class="as-lbl">Activity</div><div class="as-val" style="font-size:14px">Active</div><div class="as-u">5x/week</div></div>
-    </div>
-    <div class="amit-goals">
-      <h4>Daily Progress (example filled day)</h4>
-      <div class="ag-row">
-        <span class="ag-label">Protein (133g)</span>
-        <div class="ag-bar"><div class="ag-fill" style="width:67%;background:linear-gradient(90deg,var(--gr),var(--gr2))"></div></div>
-        <span class="ag-val" style="color:var(--gr)">75g</span>
-      </div>
-      <div class="ag-row">
-        <span class="ag-label">Calories (2683)</span>
-        <div class="ag-bar"><div class="ag-fill" style="width:55%;background:linear-gradient(90deg,var(--sf),var(--sf2))"></div></div>
-        <span class="ag-val" style="color:var(--sf)">1290</span>
-      </div>
-      <div class="ag-row">
-        <span class="ag-label">Carbs (260g)</span>
-        <div class="ag-bar"><div class="ag-fill" style="width:40%;background:linear-gradient(90deg,#1565C0,#42A5F5)"></div></div>
-        <span class="ag-val" style="color:#1565C0">104g</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="bmi-grid">
-    <div class="card">
-      <div class="sec-title" style="color:var(--blu)">⚖️ BMI Calculator</div>
-      <div class="bmi-form">
-        <label>Your Name</label>
-        <input type="text" id="bmiName" placeholder="e.g. Amit" value="Amit"/>
-        <label>Weight</label>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input type="number" id="bmiWeight" placeholder="74" value="74" style="flex:1"/>
-          <select id="bmiWeightUnit" style="width:70px">
-            <option value="kg">kg</option>
-            <option value="lb">lb</option>
-          </select>
-        </div>
-        <label>Height</label>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input type="number" id="bmiHeight" placeholder="5" value="5" style="flex:1"/>
-          <select id="bmiHeightUnit" style="width:80px">
-            <option value="cm">cm</option>
-            <option value="ft" selected>ft/in</option>
-          </select>
-        </div>
-        <div id="bmiInchWrap" style="display:block;margin-top:6px;">
-          <input type="number" id="bmiInches" placeholder="inches (0-11)" min="0" max="11" value="10"/>
-        </div>
-        <label>Age</label>
-        <input type="number" id="bmiAge" placeholder="25" value="25"/>
-        <label>Gender</label>
-        <select id="bmiGender">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-        <label>Activity Level</label>
-        <select id="bmiActivity">
-          <option value="1.2">Sedentary (desk job, no exercise)</option>
-          <option value="1.375">Lightly active (1–3 days/week)</option>
-          <option value="1.55" selected>Moderately active (3–5 days/week)</option>
-          <option value="1.725">Very active (6–7 days/week)</option>
-          <option value="1.9">Extra active (athlete / physical job)</option>
-        </select>
-        <label>Goal</label>
-        <select id="bmiGoal">
-          <option value="loss">Weight Loss</option>
-          <option value="maintain" selected>Maintain Weight</option>
-          <option value="gain">Muscle Gain</option>
-        </select>
-        <button class="bmi-calc-btn" onclick="calcBMI()">Calculate My BMI & Nutrition</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="sec-title" style="color:var(--blu)">📈 Your Results</div>
-      <div id="bmiDefault" style="text-align:center;padding:40px 0;color:var(--mu)">
-        <div style="font-size:48px;margin-bottom:10px">⚖️</div>
-        <p style="font-size:13px">Fill in your details and hit Calculate<br/>to see your BMI and nutrition goals</p>
-      </div>
-      <div class="bmi-result" id="bmiResult">
-        <div class="bmi-score-ring">
-          <div class="bmi-circle" id="bmiCircle">
-            <div class="bval" id="bmiVal">—</div>
-            <div class="blab" id="bmiLab">—</div>
-          </div>
-          <span class="bmi-cat" id="bmiCatBadge"></span>
-        </div>
-        <div class="bmi-metrics">
-          <div class="bmi-met"><div class="bm-lbl">Daily Calories</div><div class="bm-val" id="bCalVal">—</div><div class="bm-unit">kcal/day</div></div>
-          <div class="bmi-met"><div class="bm-lbl">Daily Protein</div><div class="bm-val" id="bProVal">—</div><div class="bm-unit">grams/day</div></div>
-          <div class="bmi-met"><div class="bm-lbl">Ideal Weight Range</div><div class="bm-val" id="bIdealVal">—</div><div class="bm-unit">kg</div></div>
-          <div class="bmi-met"><div class="bm-lbl">BMR (Base Calories)</div><div class="bm-val" id="bBMRVal">—</div><div class="bm-unit">kcal/day</div></div>
-        </div>
-        <div class="bmi-scale">
-          <div class="bmi-scale-title">BMI Scale</div>
-          <div class="bmi-bar-wrap"><div class="bmi-needle" id="bmiNeedle" style="left:25%"></div></div>
-          <div class="bmi-scale-labels"><span>Underweight<br/>&lt;18.5</span><span>Normal<br/>18.5–24.9</span><span>Overweight<br/>25–29.9</span><span>Obese<br/>&gt;30</span></div>
-        </div>
-        <div class="bmi-advice" id="bmiAdvice">
-          <div class="ba-title" id="bmiAdvTitle"></div>
-          <p id="bmiAdvText"></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ TIMING & GOALS TAB ============ -->
-<div class="tab-panel" id="tab-tips">
-
-  <div class="tips-header">
-    <h2>🕐 Meal Timing, Muscle Goals & Body Types</h2>
-    <p>Science-backed guide: when to eat, how much protein & calories for lean vs bulky body</p>
-  </div>
-
-  <!-- MEAL TIMING TIMELINE -->
-  <div class="timeline">
-    <div class="timeline-header">
-      <h3>⏰ Ideal Meal Timing Schedule</h3>
-      <p>Follow these gaps for maximum digestion, protein absorption & energy</p>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-time-col">
-        <div class="tl-dot" style="background:#FF9800"></div>
-        <div class="tl-clock">6:30–7:00 AM</div>
-        <div class="tl-gap-badge">Wake Up</div>
-      </div>
-      <div class="tl-content">
-        <div class="tl-meal-name">🌅 Breakfast — Power Start</div>
-        <div class="tl-meal-desc">Eat within <strong>30–60 mins of waking up</strong>. Boosts metabolism by 10–15%. Best time for high-protein food — oats, eggs, whey. Your body is in a fasted state and absorbs protein fastest.</div>
-        <div class="tl-tags">
-          <span class="tl-tag" style="background:#FFF3E0;color:#E65100">🥚 Protein-first</span>
-          <span class="tl-tag" style="background:#E8F5E9;color:#2E7D32">⚡ Metabolism boost</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-time-col">
-        <div class="tl-dot" style="background:#66BB6A"></div>
-        <div class="tl-clock">10:00–10:30 AM</div>
-        <div class="tl-gap-badge">~3–3.5 hrs</div>
-      </div>
-      <div class="tl-content">
-        <div class="tl-meal-name">🥤 Mid-Morning Snack</div>
-        <div class="tl-meal-desc">Keep a <strong>3–3.5 hour gap</strong> from breakfast. This is the golden gap — stomach is empty but not hungry. Best for Greek yogurt, fruit, handful of nuts, or buttermilk. Keeps blood sugar stable.</div>
-        <div class="tl-tags">
-          <span class="tl-tag" style="background:#E8F5E9;color:#1B5E20">🩸 Blood sugar stable</span>
-          <span class="tl-tag" style="background:#E3F2FD;color:#0D47A1">🧠 Focus boost</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-time-col">
-        <div class="tl-dot" style="background:#42A5F5"></div>
-        <div class="tl-clock">1:00–2:00 PM</div>
-        <div class="tl-gap-badge">~3 hrs</div>
-      </div>
-      <div class="tl-content">
-        <div class="tl-meal-name">☀️ Lunch — Biggest Meal</div>
-        <div class="tl-meal-desc">Lunch should be your <strong>largest and most calorie-dense</strong> meal. Your digestive fire (metabolism) peaks between 12–2 PM. Best time for rice, dal, roti, chicken, rajma. Your body processes complex carbs best now.</div>
-        <div class="tl-tags">
-          <span class="tl-tag" style="background:#FFF3E0;color:#BF360C">🔥 Peak digestion</span>
-          <span class="tl-tag" style="background:#F3E5F5;color:#6A1B9A">💪 Max absorption</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-time-col">
-        <div class="tl-dot" style="background:#AB47BC"></div>
-        <div class="tl-clock">4:30–5:00 PM</div>
-        <div class="tl-gap-badge">~3 hrs</div>
-      </div>
-      <div class="tl-content">
-        <div class="tl-meal-name">🌤️ Pre-Workout / Evening Snack</div>
-        <div class="tl-meal-desc">Eat <strong>60–90 minutes before workout</strong> if you train in evening. Light carb + protein combo: banana + boiled eggs, or sattu shake. Provides energy without bloating during exercise.</div>
-        <div class="tl-tags">
-          <span class="tl-tag" style="background:#FCE4EC;color:#C62828">⚡ Pre-workout fuel</span>
-          <span class="tl-tag" style="background:#E8F5E9;color:#1B5E20">🍌 Easy carbs</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-time-col">
-        <div class="tl-dot" style="background:#EF5350"></div>
-        <div class="tl-clock">6:30–7:30 PM</div>
-        <div class="tl-gap-badge">Post-workout</div>
-      </div>
-      <div class="tl-content">
-        <div class="tl-meal-name">🏋️ Post-Workout Protein Window</div>
-        <div class="tl-meal-desc">The <strong>30–45 minute window after workout</strong> is CRITICAL. Consume 25–40g protein immediately. Whey shake, chicken, eggs. This is when muscle repair begins — don't skip! Pair with fast carbs (banana/rice) to spike insulin and drive protein into muscles.</div>
-        <div class="tl-tags">
-          <span class="tl-tag" style="background:#FCE4EC;color:#B71C1C">⏱️ Golden 45 mins</span>
-          <span class="tl-tag" style="background:#FFF3E0;color:#E65100">💪 Muscle repair</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-time-col">
-        <div class="tl-dot" style="background:#5C6BC0"></div>
-        <div class="tl-clock">8:00–9:00 PM</div>
-        <div class="tl-gap-badge">~2–2.5 hrs</div>
-      </div>
-      <div class="tl-content">
-        <div class="tl-meal-name">🌙 Dinner — Light & Protein-Rich</div>
-        <div class="tl-meal-desc">Keep dinner <strong>light on carbs, high on protein</strong>. Avoid rice at night — switch to 1–2 rotis or skip carbs entirely. Dal, egg bhurji, grilled chicken, or paneer. Slower-digesting casein protein (paneer/curd) is ideal — feeds muscles through the night.</div>
-        <div class="tl-tags">
-          <span class="tl-tag" style="background:#E8EAF6;color:#3949AB">🌙 Casein protein</span>
-          <span class="tl-tag" style="background:#E8F5E9;color:#2E7D32">🥗 Low carb</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-time-col">
-        <div class="tl-dot" style="background:#78909C"></div>
-        <div class="tl-clock">10:30–11:00 PM</div>
-        <div class="tl-gap-badge">2–2.5 hrs after dinner</div>
-      </div>
-      <div class="tl-content">
-        <div class="tl-meal-name">😴 Sleep — The Secret Muscle Builder</div>
-        <div class="tl-meal-desc">Sleep <strong>at least 2–2.5 hours after dinner</strong>. 7–9 hours of sleep is non-negotiable — 70% of muscle repair happens during deep sleep (Growth Hormone release). A small glass of warm milk or 5 soaked almonds before bed feeds slow overnight recovery.</div>
-        <div class="tl-tags">
-          <span class="tl-tag" style="background:#EDE7F6;color:#512DA8">🛌 GH release</span>
-          <span class="tl-tag" style="background:#E8F5E9;color:#1B5E20">🧬 Muscle repair</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- KEY TIMING RULES -->
-  <div class="card" style="margin-bottom:18px">
-    <div class="sec-title" style="color:#00695C">⚡ Critical Meal Gap Rules</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
-      <div style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:1.5px solid #A5D6A7;border-radius:12px;padding:13px;">
-        <div style="font-size:22px;margin-bottom:6px">✅</div>
-        <div style="font-size:12px;font-weight:700;color:#1B5E20;margin-bottom:4px">Ideal Gap Between Meals</div>
-        <div style="font-size:13px;color:var(--tx);font-weight:600">3–3.5 hours</div>
-        <div style="font-size:11px;color:var(--mu);margin-top:3px">Allows full digestion before next meal. Prevents insulin spikes.</div>
-      </div>
-      <div style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border:1.5px solid #90CAF9;border-radius:12px;padding:13px;">
-        <div style="font-size:22px;margin-bottom:6px">💪</div>
-        <div style="font-size:12px;font-weight:700;color:#0D47A1;margin-bottom:4px">Pre-Workout Meal</div>
-        <div style="font-size:13px;color:var(--tx);font-weight:600">60–90 minutes before</div>
-        <div style="font-size:11px;color:var(--mu);margin-top:3px">Light carbs + protein. No heavy meal — causes sluggishness.</div>
-      </div>
-      <div style="background:linear-gradient(135deg,#FCE4EC,#F8BBD9);border:1.5px solid #F48FB1;border-radius:12px;padding:13px;">
-        <div style="font-size:22px;margin-bottom:6px">⏱️</div>
-        <div style="font-size:12px;font-weight:700;color:#B71C1C;margin-bottom:4px">Post-Workout Window</div>
-        <div style="font-size:13px;color:var(--tx);font-weight:600">Within 30–45 mins</div>
-        <div style="font-size:11px;color:var(--mu);margin-top:3px">Anabolic window: protein synthesis peaks. Missing this = lost gains.</div>
-      </div>
-      <div style="background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1.5px solid #FFD54F;border-radius:12px;padding:13px;">
-        <div style="font-size:22px;margin-bottom:6px">🌙</div>
-        <div style="font-size:12px;font-weight:700;color:#E65100;margin-bottom:4px">Dinner to Bed Gap</div>
-        <div style="font-size:13px;color:var(--tx);font-weight:600">Minimum 2–2.5 hours</div>
-        <div style="font-size:11px;color:var(--mu);margin-top:3px">Digestive system needs to rest. Eating late = fat storage, poor sleep.</div>
-      </div>
-      <div style="background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border:1.5px solid #CE93D8;border-radius:12px;padding:13px;">
-        <div style="font-size:22px;margin-bottom:6px">🍽️</div>
-        <div style="font-size:12px;font-weight:700;color:#4A148C;margin-bottom:4px">Total Meals Per Day</div>
-        <div style="font-size:13px;color:var(--tx);font-weight:600">4–5 meals</div>
-        <div style="font-size:11px;color:var(--mu);margin-top:3px">Never go more than 4 hours without eating. Prevents muscle breakdown (catabolism).</div>
-      </div>
-      <div style="background:linear-gradient(135deg,#E0F2F1,#B2DFDB);border:1.5px solid #80CBC4;border-radius:12px;padding:13px;">
-        <div style="font-size:22px;margin-bottom:6px">💧</div>
-        <div style="font-size:12px;font-weight:700;color:#004D40;margin-bottom:4px">Water Timing</div>
-        <div style="font-size:13px;color:var(--tx);font-weight:600">30 mins before meals</div>
-        <div style="font-size:11px;color:var(--mu);margin-top:3px">Drinking during meals dilutes digestive enzymes. Drink before or 30 mins after eating.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- LEAN vs BULK vs MAINTAIN -->
-  <div style="margin-bottom:14px">
-    <div class="sec-title" style="font-size:18px;color:var(--tx)">🎯 Body Goals: Protein & Calorie Requirements</div>
-  </div>
-
-  <div class="goal-compare">
-    <!-- LEAN BODY -->
-    <div class="goal-card goal-card-lean">
-      <div class="goal-card-hdr">
-        <div class="gc-em">🏃</div>
-        <h3>Lean Body</h3>
-        <p>Athletic, defined muscles, low body fat (10–15% for men, 18–24% for women)</p>
-      </div>
-      <div class="goal-card-body">
-        <div class="goal-metric">
-          <div><div class="gm-label">Daily Calories</div><div class="gm-note">100–300 kcal deficit from TDEE</div></div>
-          <div class="gm-val lean-val">TDEE −200</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">Protein Intake</div><div class="gm-note">Per kg of bodyweight per day</div></div>
-          <div class="gm-val lean-val">1.8–2.2g/kg</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">Carbohydrates</div><div class="gm-note">Moderate, mostly complex</div></div>
-          <div class="gm-val lean-val">3–4g/kg</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">Fats</div><div class="gm-note">Healthy fats only</div></div>
-          <div class="gm-val lean-val">0.6–0.8g/kg</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">For 74kg Person (Protein)</div><div class="gm-note">Example: Amit at 74kg</div></div>
-          <div class="gm-val lean-val">133–163g</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">For 74kg Person (Calories)</div><div class="gm-note">Amit's TDEE ~2683 kcal</div></div>
-          <div class="gm-val lean-val">~2480 kcal</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">Training</div><div class="gm-note">Mix of cardio + weights</div></div>
-          <div class="gm-val lean-val">5–6 days</div>
-        </div>
-        <div style="margin-top:12px;background:#E3F2FD;border-radius:10px;padding:10px 12px;">
-          <div style="font-size:10.5px;font-weight:700;color:#0D47A1;margin-bottom:5px">🍽️ Best Foods for Lean Body</div>
-          <div style="font-size:11.5px;color:#1565C0;line-height:1.8">Chicken breast, fish, egg whites, Greek yogurt, oats, broccoli, spinach, sattu, moong dal, green tea, black coffee</div>
-        </div>
-        <div style="margin-top:10px;background:#FFEBEE;border-radius:10px;padding:10px 12px;">
-          <div style="font-size:10.5px;font-weight:700;color:#B71C1C;margin-bottom:5px">🚫 Avoid for Lean Body</div>
-          <div style="font-size:11.5px;color:#C62828;line-height:1.8">Sugar, maida, fried foods, alcohol, packaged juice, white rice at night, sweets</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BULKY BODY -->
-    <div class="goal-card goal-card-bulk">
-      <div class="goal-card-hdr">
-        <div class="gc-em">💪</div>
-        <h3>Bulky / Muscular Body</h3>
-        <p>Maximum muscle mass, bigger size, higher body fat acceptable (15–20% for men)</p>
-      </div>
-      <div class="goal-card-body">
-        <div class="goal-metric">
-          <div><div class="gm-label">Daily Calories</div><div class="gm-note">300–500 kcal surplus from TDEE</div></div>
-          <div class="gm-val bulk-val">TDEE +400</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">Protein Intake</div><div class="gm-note">Per kg of bodyweight per day</div></div>
-          <div class="gm-val bulk-val">2.0–2.5g/kg</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">Carbohydrates</div><div class="gm-note">High carbs to fuel muscle growth</div></div>
-          <div class="gm-val bulk-val">5–7g/kg</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">Fats</div><div class="gm-note">Higher for hormone production</div></div>
-          <div class="gm-val bulk-val">1.0–1.2g/kg</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">For 74kg Person (Protein)</div><div class="gm-note">Example: Amit bulking at 74kg</div></div>
-          <div class="gm-val bulk-val">148–185g</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">For 74kg Person (Calories)</div><div class="gm-note">Amit's TDEE ~2683 kcal</div></div>
-          <div class="gm-val bulk-val">~3083 kcal</div>
-        </div>
-        <div class="goal-metric">
-          <div><div class="gm-label">Training</div><div class="gm-note">Heavy weights, low cardio</div></div>
-          <div class="gm-val bulk-val">4–5 days</div>
-        </div>
-        <div style="margin-top:12px;background:#FFEBEE;border-radius:10px;padding:10px 12px;">
-          <div style="font-size:10.5px;font-weight:700;color:#B71C1C;margin-bottom:5px">🍽️ Best Foods for Bulk</div>
-          <div style="font-size:11.5px;color:#C62828;line-height:1.8">Chicken, beef, whole eggs, paneer, full-fat milk, rice, banana, peanut butter, cashews, ghee in moderation, whey protein, oats</div>
-        </div>
-        <div style="margin-top:10px;background:#FFF3E0;border-radius:10px;padding:10px 12px;">
-          <div style="font-size:10.5px;font-weight:700;color:#E65100;margin-bottom:5px">⚠️ Watch Out During Bulk</div>
-          <div style="font-size:11.5px;color:#BF360C;line-height:1.8">Don't eat junk food surplus — dirty bulk gains mostly fat. Keep 80% food clean even in a surplus.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MUSCLE MAINTENANCE -->
-  <div class="maintain-card">
-    <div class="maintain-hdr">
-      <div class="gc-em">🛡️</div>
-      <h3>Muscle Maintenance</h3>
-      <p>Keep muscle, stay at current weight, recompose body — best long-term strategy</p>
-    </div>
-    <div class="maintain-body">
-      <div class="maintain-grid">
-        <div class="maintain-stat">
-          <div class="ms-lbl">Daily Calories</div>
-          <div class="ms-val">TDEE</div>
-          <div class="ms-unit">Eat at maintenance</div>
-        </div>
-        <div class="maintain-stat">
-          <div class="ms-lbl">Protein Intake</div>
-          <div class="ms-val">1.6–2g/kg</div>
-          <div class="ms-unit">Per kg bodyweight</div>
-        </div>
-        <div class="maintain-stat">
-          <div class="ms-lbl">Carbohydrates</div>
-          <div class="ms-val">3–5g/kg</div>
-          <div class="ms-unit">Balanced amount</div>
-        </div>
-        <div class="maintain-stat">
-          <div class="ms-lbl">For 70kg (Protein)</div>
-          <div class="ms-val">118–148g</div>
-          <div class="ms-unit">per day</div>
-        </div>
-        <div class="maintain-stat">
-          <div class="ms-lbl">For 70kg (Calories)</div>
-          <div class="ms-val">~2683</div>
-          <div class="ms-unit">kcal per day</div>
-        </div>
-        <div class="maintain-stat">
-          <div class="ms-lbl">Training Days</div>
-          <div class="ms-val">3–4</div>
-          <div class="ms-unit">days per week</div>
-        </div>
-      </div>
-      <div style="background:#F3E5F5;border-radius:11px;padding:13px;border:1.5px solid #CE93D8;">
-        <div style="font-size:11.5px;font-weight:700;color:#4A148C;margin-bottom:6px">💡 Best Strategy for Maintenance</div>
-        <div style="font-size:12px;color:#4A148C;line-height:1.8">Cycle between slight deficit (Mon–Thu) and slight surplus (Fri–Sun). This "mini-cut / mini-bulk" method preserves muscle while slowly improving body composition. Prioritize progressive overload in gym — lift slightly heavier each week to maintain/grow muscle even at maintenance calories.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COMPARISON TABLE -->
-  <div class="comp-table-wrap">
-    <table class="comp-table">
-      <thead>
-        <tr>
-          <th>Metric</th>
-          <th class="lean-hd">🏃 Lean Body</th>
-          <th class="bulk-hd">💪 Bulky Body</th>
-          <th class="maint-hd">🛡️ Maintain</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Daily Calories (70kg)</td><td class="lean-cell">~2,480–2,580</td><td class="bulk-cell">~3,080–3,180</td><td class="maint-cell">~2,683</td></tr>
-        <tr><td>Protein per day (70kg)</td><td class="lean-cell">133–163g</td><td class="bulk-cell">148–185g</td><td class="maint-cell">118–148g</td></tr>
-        <tr><td>Protein per kg body wt</td><td class="lean-cell">1.8–2.2g</td><td class="bulk-cell">2.0–2.5g</td><td class="maint-cell">1.6–2.0g</td></tr>
-        <tr><td>Carbohydrates per day</td><td class="lean-cell">Low–Moderate</td><td class="bulk-cell">High</td><td class="maint-cell">Moderate</td></tr>
-        <tr><td>Fats per day</td><td class="lean-cell">Low–Moderate</td><td class="bulk-cell">Moderate–High</td><td class="maint-cell">Moderate</td></tr>
-        <tr><td>Calorie vs TDEE</td><td class="lean-cell">−200 to −400</td><td class="bulk-cell">+300 to +500</td><td class="maint-cell">Exactly TDEE</td></tr>
-        <tr><td>Cardio</td><td class="lean-cell">High (4–5×/wk)</td><td class="bulk-cell">Low (1–2×/wk)</td><td class="maint-cell">Moderate (2–3×)</td></tr>
-        <tr><td>Weight Training</td><td class="lean-cell">Moderate weight, high reps</td><td class="bulk-cell">Heavy weight, low reps</td><td class="maint-cell">Progressive overload</td></tr>
-        <tr><td>Timeline to see results</td><td class="lean-cell">6–12 weeks</td><td class="bulk-cell">12–24 weeks</td><td class="maint-cell">Ongoing</td></tr>
-        <tr><td>Typical Indian foods</td><td class="lean-cell">Dal, moong, chicken, oats</td><td class="bulk-cell">Rice, roti, chicken, paneer</td><td class="maint-cell">Balanced thali</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- MUSCLE BUILDING TIPS -->
-  <div class="muscle-tips-section">
-    <div class="mts-header">
-      <h3>💡 Pro Tips: Muscle Building, Maintenance & Fat Loss</h3>
-    </div>
-
-    <div class="tip-accordion">
-      <div class="ta-icon">🧬</div>
-      <div>
-        <div class="ta-title">Protein Distribution Matters More Than Total</div>
-        <div class="ta-body">Don't eat 150g protein all at once. Your body can only use ~30–40g of protein per meal for muscle synthesis. Spread it across 4–5 meals. Example: 35g breakfast + 35g lunch + 30g snack + 30g dinner = 130g total, fully utilized.</div>
-        <span class="ta-highlight">Aim: 30–40g per meal, 4–5 times per day</span>
-      </div>
-    </div>
-
-    <div class="tip-accordion">
-      <div class="ta-icon">⚡</div>
-      <div>
-        <div class="ta-title">The Anabolic Window is Real — But Short</div>
-        <div class="ta-body">After training, muscle protein synthesis spikes for 30–45 minutes. This is your golden window. Consume fast protein (whey, egg whites) + simple carbs (banana, white rice) within this window. The carb-protein combo releases insulin, which drives amino acids into muscle cells 3x faster than protein alone.</div>
-        <span class="ta-highlight">Whey + banana = best post-workout combo</span>
-      </div>
-    </div>
-
-    <div class="tip-accordion">
-      <div class="ta-icon">😴</div>
-      <div>
-        <div class="ta-title">Sleep is Your Most Anabolic Activity</div>
-        <div class="ta-body">70% of muscle repair and growth hormone (HGH) release happens during deep sleep (Stages 3–4). Without 7–9 hours of quality sleep, even perfect training and diet gives 40–50% less results. Paneer or curd before bed provides slow-digesting casein protein that feeds muscles through the night.</div>
-        <span class="ta-highlight">7–9 hrs sleep = free muscle growth</span>
-      </div>
-    </div>
-
-    <div class="tip-accordion">
-      <div class="ta-icon">🔄</div>
-      <div>
-        <div class="ta-title">Progressive Overload — The Only Muscle Building Rule</div>
-        <div class="ta-body">Your muscles grow ONLY when forced to do more than last time. This means: lift slightly heavier, do 1 more rep, or reduce rest time every week. Without progressive overload, even perfect nutrition won't add muscle — your body has no reason to grow.</div>
-        <span class="ta-highlight">Add 2.5–5kg or 1–2 reps every week</span>
-      </div>
-    </div>
-
-    <div class="tip-accordion">
-      <div class="ta-icon">💧</div>
-      <div>
-        <div class="ta-title">Hydration is a Performance Multiplier</div>
-        <div class="ta-body">Muscles are 75% water. Being even 2% dehydrated reduces strength by 10–20%. Drink 3–4 liters daily. Add electrolytes (coconut water, ORS, pinch of salt + lemon) on training days. Avoid drinking large quantities during meals — drink 30 min before or after to preserve digestive enzymes.</div>
-        <span class="ta-highlight">3–4 liters/day. More on training days.</span>
-      </div>
-    </div>
-
-    <div class="tip-accordion">
-      <div class="ta-icon">🫘</div>
-      <div>
-        <div class="ta-title">Vegetarians: Combine Proteins for Complete Amino Acids</div>
-        <div class="ta-body">Individual plant foods lack one or more essential amino acids. Dal (lacks methionine) + Rice (lacks lysine) = complete protein together. Similarly, roti + dal, chickpeas + yogurt, or oats + milk create complete proteins. This is especially important for vegetarians targeting muscle gain.</div>
-        <span class="ta-highlight">Dal + Rice = Complete protein (like chicken)</span>
-      </div>
-    </div>
-
-    <div class="tip-accordion">
-      <div class="ta-icon">🚫</div>
-      <div>
-        <div class="ta-title">Alcohol: The Muscle Killer</div>
-        <div class="ta-body">Alcohol suppresses testosterone by 20–30% for up to 24 hours after consumption. It also spikes cortisol (muscle-destroying hormone), dehydrates cells, and blocks protein synthesis for up to 8 hours. Even 2–3 drinks on Friday night can cost you 2–3 days of muscle building potential. If you must drink, choose 1 drink max, and always with food.</div>
-        <span class="ta-highlight">Alcohol = muscle loss + fat gain</span>
-      </div>
-    </div>
-
-    <div class="tip-accordion">
-      <div class="ta-icon">🌅</div>
-      <div>
-        <div class="ta-title">Never Skip Breakfast — Especially If You Train</div>
-        <div class="ta-body">After 7–9 hours of overnight fasting, your body is in a mild catabolic state (breaking down muscle for energy). A high-protein breakfast within 60 minutes of waking reverses this immediately. Skipping breakfast raises cortisol, kills focus, and causes overeating at lunch — the triple damage combo most people ignore.</div>
-        <span class="ta-highlight">Eat within 60 mins of waking up</span>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ============ MY DIET TAB ============ -->
-<div class="tab-panel" id="tab-compare">
-  <div class="mydet-header">
-    <h2>🥗 My Diet — Analysis & Smart Suggestions</h2>
-    <p>Your current eggetarian diet broken down · Protein distribution analysis · 3 personalized upgrade plans</p>
-  </div>
-
-  <!-- AMIT'S CURRENT DIET — GREEN -->
-  <div class="amit-diet-title">✅ Your Current Daily Diet (Eggetarian)</div>
-  <div class="amit-diet-grid">
-    <div class="amit-diet-card">
-      <div class="adc-time">🌅 Morning — Breakfast</div>
-      <div class="adc-name">Power Breakfast Stack</div>
-      <ul class="adc-items">
-        <li>Milk 200ml → <strong>10g protein</strong></li>
-        <li>High Protein Oats → <strong>12g protein</strong></li>
-        <li>Plant Protein shake (1 scoop) → <strong>24g protein</strong></li>
-      </ul>
-      <span class="adc-protein">✅ ~46g protein</span>
-    </div>
-    <div class="amit-diet-card">
-      <div class="adc-time">☀️ Afternoon — Lunch</div>
-      <div class="adc-name">Rajma Chawal</div>
-      <ul class="adc-items">
-        <li>Rajma Chawal → <strong>~7–8g protein</strong></li>
-        <li>No additional protein source</li>
-      </ul>
-      <span class="adc-warn">⚠️ Only ~8g — Too low!</span>
-    </div>
-    <div class="amit-diet-card">
-      <div class="adc-time">🌤️ Evening</div>
-      <div class="adc-name">Coffee + Bananas</div>
-      <ul class="adc-items">
-        <li>Coffee with milk 200ml → <strong>10g protein</strong></li>
-        <li>3 Bananas → <strong>~3g protein</strong></li>
-      </ul>
-      <span class="adc-protein">~13g protein</span>
-    </div>
-    <div class="amit-diet-card">
-      <div class="adc-time">🌙 Night — Post Evening</div>
-      <div class="adc-name">Egg Feast + Night Shake</div>
-      <ul class="adc-items">
-        <li>8 Eggs (6 whole + 2 whites) → <strong>~54g protein</strong></li>
-        <li>Curd 200ml → <strong>~7g protein</strong></li>
-        <li>Protein Shake (1 scoop) → <strong>24g protein</strong></li>
-      </ul>
-      <span class="adc-warn">🔺 ~85g at once — body wastes ~45g</span>
-    </div>
-  </div>
-
-  <!-- TOTAL SUMMARY -->
-  <div class="amit-total-bar">
-    <div class="atb-item"><div class="atb-lbl">Total Protein</div><div class="atb-val">~131g</div><div class="atb-unit">per day</div></div>
-    <div class="atb-divider"></div>
-    <div class="atb-item"><div class="atb-lbl">Protein Shakes</div><div class="atb-val">2</div><div class="atb-unit">scoops/day</div></div>
-    <div class="atb-divider"></div>
-    <div class="atb-item"><div class="atb-lbl">Eggs Daily</div><div class="atb-val">8</div><div class="atb-unit">eggs</div></div>
-    <div class="atb-divider"></div>
-    <div class="atb-item"><div class="atb-lbl">Meals</div><div class="atb-val">4</div><div class="atb-unit">sittings</div></div>
-    <div class="atb-divider"></div>
-    <div class="atb-note">💡 <strong>Your protein total is great (131g)</strong> but the distribution is the problem. ~85g lands at night in one sitting — the body can only use ~40g per meal. Spreading it is the key fix.</div>
-  </div>
-
-  <!-- PROTEIN DISTRIBUTION VISUAL -->
-  <div class="prot-dist">
-    <div class="prot-dist-title">📊 Your Protein Distribution Across the Day</div>
-    <div class="pdist-row">
-      <span class="pdist-label">🌅 Breakfast (~46g)</span>
-      <div class="pdist-track"><div class="pdist-fill" style="width:70%;background:linear-gradient(90deg,#1A6B3C,#2D9158)"></div></div>
-      <span class="pdist-val">46g ✅</span>
-    </div>
-    <div class="pdist-row">
-      <span class="pdist-label">☀️ Lunch (~8g)</span>
-      <div class="pdist-track"><div class="pdist-fill" style="width:12%;background:linear-gradient(90deg,#E65100,#FF8F00)"></div></div>
-      <span class="pdist-val pdist-warn">8g ⚠️</span>
-    </div>
-    <div class="pdist-row">
-      <span class="pdist-label">🌤️ Evening (~13g)</span>
-      <div class="pdist-track"><div class="pdist-fill" style="width:20%;background:linear-gradient(90deg,#FF8F00,#FFC107)"></div></div>
-      <span class="pdist-val">13g</span>
-    </div>
-    <div class="pdist-row">
-      <span class="pdist-label">🌙 Night (~85g)</span>
-      <div class="pdist-track"><div class="pdist-fill" style="width:100%;background:linear-gradient(90deg,#B71C1C,#E53935)"></div></div>
-      <span class="pdist-val pdist-warn">85g 🔺</span>
-    </div>
-    <div style="font-size:11px;color:var(--mu);margin-top:10px;font-style:italic;">🎯 Ideal distribution: 30–40g per meal across 4–5 meals. Max utilisation per sitting ≈ 40g.</div>
-  </div>
-
-  <!-- PERSONALISED DIET CALCULATOR -->
-  <div class="calc-section">
-    <div class="calc-section-title">🎯 Personalised Eggetarian Diet Calculator</div>
-    <div class="calc-section-sub">Enter your stats and we'll calculate your exact protein, calorie targets and generate 3 custom eggetarian plans tailored just for you.</div>
-    <div class="calc-inputs">
-      <div class="calc-inp-group">
+  <div class="card">
+    <div class="sec-title">⚖️ BMI Calculator</div>
+    <div class="bmi-input-group">
+      <div class="gap-inp">
         <label>Weight (kg)</label>
-        <input type="number" id="cd-weight" value="74" min="40" max="150" placeholder="74"/>
+        <input type="number" id="bmiW" placeholder="70">
       </div>
-      <div class="calc-inp-group">
-        <label>Height</label>
-        <div style="display:flex;gap:6px">
-          <input type="number" id="cd-feet" value="5" min="4" max="7" style="width:60px;flex-shrink:0" placeholder="ft"/>
-          <input type="number" id="cd-inch" value="10" min="0" max="11" placeholder="in"/>
-        </div>
-      </div>
-      <div class="calc-inp-group">
-        <label>Age</label>
-        <input type="number" id="cd-age" value="25" min="15" max="60" placeholder="25"/>
-      </div>
-      <div class="calc-inp-group">
-        <label>Activity Level</label>
-        <select id="cd-activity">
-          <option value="1.375">Lightly Active (1–3x/week)</option>
-          <option value="1.55" selected>Moderately Active (3–5x/week)</option>
-          <option value="1.725">Very Active (6–7x/week)</option>
-        </select>
-      </div>
-      <div class="calc-inp-group">
-        <label>Goal</label>
-        <select id="cd-goal">
-          <option value="loss">Fat Loss (Cut)</option>
-          <option value="maintain" selected>Maintain / Recompose</option>
-          <option value="gain">Muscle Gain (Bulk)</option>
-        </select>
-      </div>
-      <div class="calc-inp-group">
-        <label>Protein Shakes/day</label>
-        <select id="cd-shakes">
-          <option value="1">1 scoop (~24g)</option>
-          <option value="2" selected>2 scoops (~48g)</option>
-        </select>
+      <div class="gap-inp">
+        <label>Height (cm)</label>
+        <input type="number" id="bmiH" placeholder="175">
       </div>
     </div>
-    <button class="calc-btn" onclick="calcMyDiet()">🥗 Generate My Personalised Plans</button>
+    <button class="gap-calc-btn" style="background:var(--blu)" onclick="calcBMI()">Check BMI</button>
+    
+    <div class="bmi-res-box" id="bmiResultBox">
+      <div class="bmi-val" id="bmiVal">22.5</div>
+      <div style="font-weight:700;margin-top:5px;color:var(--tx)" id="bmiCat">Normal Weight</div>
+      <p style="font-size:13px;color:var(--mu);margin-top:8px;line-height:1.4" id="bmiMsg"></p>
+    </div>
+  </div>
+</div>
 
-    <div class="calc-results" id="cd-results">
-      <div class="calc-result-title">📈 Your Nutrition Targets</div>
-      <div class="calc-stats-row" id="cd-stats"></div>
+<!-- ============ TIMING TAB (NEW BIFURCATION) ============ -->
+<div class="tab-panel" id="tab-timing">
+  <div class="card">
+    <div class="sec-title">⏰ Optimal Meal Timing</div>
+    <p style="font-size:13px;color:var(--mu);margin-bottom:12px">Select your diet preference to see the best timing schedule.</p>
+    
+    <div style="display:flex;gap:10px;margin-bottom:14px;justify-content:center;">
+      <button class="cat-chip active" onclick="renderTiming('Veg', this)">Vegetarian</button>
+      <button class="cat-chip" onclick="renderTiming('Egg', this)">Eggetarian</button>
+      <button class="cat-chip" onclick="renderTiming('Non-Veg', this)">Non-Veg</button>
+    </div>
 
-      <div class="amit-diet-title" style="margin-top:8px">💡 3 Personalised Eggetarian Plans For You</div>
-      <div class="sug-plans" id="cd-plans"></div>
+    <div id="timingContainer">
+      <!-- Content injected by JS -->
     </div>
   </div>
 </div>
@@ -1486,652 +436,425 @@ input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;}
 <div class="toast" id="toast"></div>
 
 <script>
-// ===================== FOOD DATA =====================
-const categories = ['All','Protein','Beverages','Sweets','Condiments','Street Food','Nuts & Dry Fruits','Dairy & Cheese','Grains & Veg'];
+// ══════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════
+const categories = ['All','Protein','North Indian','South Indian','Street Food','Chinese/Momos','Breads','Fruits','Snacks','Beverages'];
 
+/* Data format: p=Protein, k=Calories (kcal), f=Fiber, veg=Type
+  Sorted: Heroes first, then others.
+*/
 const foodData = [
-  {name:"Egg (Whole Boiled)", em:"🥚", p:6,   c:78,  note:"Vitamin D & Choline",       tip:"🏆 Best: 1 whole + 2 whites = 18g protein with healthy fats. Yolk has Vit D, Choline & Omega-3. Don't skip yolk entirely!",mode:"count", unit:"egg",   plu:"eggs",   cat:"Protein"},
-  {name:"Egg White Only",     em:"🤍", p:3.6, c:17,  note:"Pure protein, zero fat",    tip:"💡 3.6g protein each, only 17 kcal. Perfect late-night snack or extra protein without extra calories. Eat 3–5 a day safely.",mode:"count", unit:"white", plu:"whites", cat:"Protein"},
-  {name:"Whey Protein Scoop", em:"💪", p:24,  c:120, note:"Fast absorb; complete protein", tip:"⚡ Take within 30 min post-workout. Complete amino acid profile. Mix with milk (+7g protein). 2 scoops/day is ideal — morning + post-workout.",mode:"count",unit:"scoop",plu:"scoops",cat:"Protein"},
-  {name:"Milk (Full Fat)",    em:"🥛", p:3.4, c:61,  note:"200ml = ~7g protein + Calcium", tip:"🥛 200ml gives 7g protein + 240mg Calcium. Best with oats or protein shake. Full fat has CLA which supports fat loss. Avoid sweetened varieties.",mode:"ml",  cat:"Dairy & Cheese"},
-  {name:"Soya Chunks",        em:"🫘", p:52,  c:345, note:"Highest veg protein; Iron",  tip:"🌱 52g protein per 100g dry — highest plant protein! Soak 20 min, boil 15 min. Add to curry or stir fry. Iron + Calcium bonus. 50g dry = 100g cooked.",mode:"gram", cat:"Protein"},
-  {name:"Chicken Breast",     em:"🍗", p:31,  c:165, note:"Lean protein; Vitamin B12",  tip:"🏅 Best muscle-building food — 31g protein, only 165 kcal per 100g. Grill or bake, never fry. Eat within 2 hrs of workout for max muscle synthesis.",mode:"gram", cat:"Protein"},
-  {name:"Fish / Tuna",        em:"🐟", p:22,  c:200, note:"Omega-3 fatty acids",        tip:"🐟 Omega-3 reduces muscle soreness & inflammation. Rohu is cheapest Indian option. Eat 2–3x/week. Avoid frying — grill, steam or curry.",mode:"gram", cat:"Protein"},
-  {name:"Paneer",             em:"🧀", p:18,  c:265, note:"Calcium-rich; High fat",     mode:"gram", cat:"Protein"},
-  {name:"Tofu",               em:"⬜", p:10,  c:76,  note:"Vegan; Iron; Low calorie",   tip:"⬜ 10g protein, only 76 kcal per 100g. Absorbs flavours of any spice. Pan fry or grill — never boil alone. Press out water before cooking for best texture.",mode:"gram", cat:"Protein"},
-  {name:"Greek Yogurt",       em:"🥣", p:10,  c:59,  note:"Probiotics; Calcium",        tip:"🥣 Best gut health food. Eat daily — probiotic bacteria boost immunity & protein absorption. Plain unsweetened is best. Add berries, not sugar.",mode:"gram", cat:"Protein"},
-  {name:"Dal (Lentils)",      em:"🫙", p:24,  c:350, note:"Fibre-rich; Folate",         tip:"🫙 24g protein/100g dry. Combine dal + rice = complete protein (all 9 amino acids). Add lemon — Vit C triples iron absorption. Yellow moong is easiest to digest.",mode:"gram", cat:"Protein"},
-  {name:"Chickpeas (Chole)",  em:"🟡", p:9,   c:160, note:"High fibre & Zinc",          tip:"💛 Soak overnight, sprout for 30% more protein absorption. Add lemon + chaat masala. 150g cooked = ~14g protein. Great for lunch.",mode:"gram", cat:"Protein"},
-  {name:"Sattu Powder",       em:"🟤", p:21,  c:413, note:"Natural protein; Fiber",     tip:"🟤 21g protein/100g. Best kept Indian secret! Mix with water/milk. Add salt + lemon. Keeps you full for 5–6 hours. Great alternative to protein shakes.",mode:"gram", cat:"Protein"},
-  {name:"Roti (Wheat)",       em:"🫓", p:3.3, c:80,  note:"Complex carbs; B-Vitamins",  tip:"🫓 1 roti = 80 kcal, 3.3g protein. Whole wheat is best. Use multigrain or add sattu to atta for 2x protein boost. Limit to 3–4/day for fat loss.",mode:"count",unit:"roti", plu:"rotis",  cat:"Grains & Veg"},
-  {name:"Oats",               em:"🌾", p:17,  c:389, note:"High Beta-Glucan Fibre",     tip:"🌾 Beta-glucan lowers cholesterol & controls blood sugar. Best breakfast — keeps you full for 4 hrs. Blend with milk + whey for ultimate protein shake.",mode:"gram", cat:"Grains & Veg"},
-  {name:"Broccoli",           em:"🥦", p:2.8, c:34,  note:"Vitamin C & K; Fiber",       mode:"gram", cat:"Grains & Veg"},
-  {name:"Spinach (Palak)",    em:"🌿", p:2.9, c:23,  note:"Vitamin A; Iron; Low cal",   mode:"gram", cat:"Grains & Veg"},
-  {name:"Palak Paneer",       em:"🥬", p:10.5,c:180, note:"Iron & Vitamin A",           mode:"gram", cat:"Grains & Veg"},
-  {name:"Chili Chicken",      em:"🌶️", p:19,  c:250, note:"High protein dish",          mode:"gram", cat:"Protein"},
-  {name:"Masala Chai",        em:"☕", p:1.5, c:75,  note:"1 cup (150ml) ≈ 112 kcal",  mode:"ml",   cat:"Beverages"},
-  {name:"Cappuccino / Latte", em:"☕", p:3,   c:55,  note:"Depends on milk quantity",   mode:"ml",   cat:"Beverages"},
-  {name:"Black Coffee",       em:"🖤", p:0,   c:2,   note:"Zero cal unless you add sugar",mode:"ml", cat:"Beverages"},
-  {name:"Green Tea",          em:"🍵", p:0,   c:1,   note:"Zero calorie; antioxidants", mode:"ml",   cat:"Beverages"},
-  {name:"Lassi (Sweet)",      em:"🥤", p:3,   c:100, note:"High sugar; decent protein", mode:"ml",   cat:"Beverages"},
-  {name:"Buttermilk (Chaas)", em:"🥛", p:1.5, c:35,  note:"Best hydration + probiotic", mode:"ml",   cat:"Beverages"},
-  {name:"Coconut Water",      em:"🥥", p:0.7, c:19,  note:"Nature's electrolyte drink", mode:"ml",   cat:"Beverages"},
-  {name:"Beer (Regular)",     em:"🍺", p:0.5, c:43,  note:"Liquid bread; empty calories",mode:"ml",  cat:"Beverages"},
-  {name:"Whisky / Vodka",     em:"🥃", p:0,   c:250, note:"Very high calorie alcohol",  mode:"ml",   cat:"Beverages"},
-  {name:"Fruit Juice (Pack)", em:"🧃", p:0.5, c:58,  note:"As much sugar as Cola!",     mode:"ml",   cat:"Beverages"},
-  {name:"Gulab Jamun",        em:"🍬", p:5,   c:365, note:"Deep fried milk solids+syrup",mode:"gram",cat:"Sweets"},
-  {name:"Rasgulla",           em:"🍡", p:4,   c:190, note:"Lower cal than Gulab Jamun", mode:"gram", cat:"Sweets"},
-  {name:"Jalebi",             em:"🌀", p:2,   c:450, note:"Pure Maida+sugar; avoid",    mode:"gram", cat:"Sweets"},
-  {name:"Besan Ladoo",        em:"🟠", p:6,   c:500, note:"Extremely high fat (Ghee)",  mode:"gram", cat:"Sweets"},
-  {name:"Kaju Katli",         em:"💎", p:9,   c:480, note:"Cashews = some good fat",    mode:"gram", cat:"Sweets"},
-  {name:"Gajar Halwa",        em:"🥕", p:3,   c:300, note:"Depends on Ghee/Khoa used", mode:"gram", cat:"Sweets"},
-  {name:"Sooji Halwa",        em:"🍮", p:3,   c:325, note:"High carb semolina + fat",   mode:"gram", cat:"Sweets"},
-  {name:"Barfi (Milk)",       em:"🍫", p:10,  c:350, note:"Good protein, high sugar",   mode:"gram", cat:"Sweets"},
-  {name:"Pickle (Achar)",     em:"🫙", p:1,   c:275, note:"Watch sodium! Mostly salt+oil",mode:"gram",cat:"Condiments"},
-  {name:"Coconut Chutney",    em:"🥥", p:3,   c:235, note:"High healthy fats",          mode:"gram", cat:"Condiments"},
-  {name:"Green Chutney",      em:"🌿", p:2,   c:45,  note:"Very low cal; healthy!",     mode:"gram", cat:"Condiments"},
-  {name:"Tomato Ketchup",     em:"🍅", p:1,   c:110, note:"1 tbsp ≈ 1 tsp sugar",       mode:"gram", cat:"Condiments"},
-  {name:"Mayonnaise",         em:"🍶", p:1,   c:700, note:"Pure fat; use sparingly",    mode:"gram", cat:"Condiments"},
-  {name:"Jam (Fruit)",        em:"🍓", p:0.5, c:270, note:"Pure sugar gel",             mode:"gram", cat:"Condiments"},
-  {name:"Pani Puri (6 pcs)", em:"🫧",  p:4,   c:200, note:"Not bad if water is clean",  mode:"count",unit:"piece",plu:"pieces",cat:"Street Food"},
-  {name:"Bhel Puri",          em:"🌾", p:6,   c:280, note:"Puffed rice; Sev adds cals", mode:"gram", cat:"Street Food"},
-  {name:"Vada Pav",           em:"🍔", p:6,   c:290, note:"Calorie bomb: potato+bread", tip:"⚠️ 290 kcal per piece, mostly refined carbs. Enjoy occasionally — not daily. If craving, eat post-workout when body needs quick carbs.",mode:"count",unit:"vada pav",plu:"vada pavs",cat:"Street Food"},
-  {name:"Dhokla",             em:"🟨", p:5,   c:160, note:"Healthiest: steamed not fried",mode:"gram",cat:"Street Food"},
-  {name:"Samosa",             em:"🥟", p:3,   c:260, note:"1 samosa ≈ 250 kcal",        mode:"count",unit:"samosa",plu:"samosas",cat:"Street Food"},
-  {name:"Aloo Tikki",         em:"🥔", p:3,   c:275, note:"Deep fried potato patty",    mode:"gram", cat:"Street Food"},
-  {name:"Spring Roll",        em:"🌯", p:4,   c:250, note:"Maida absorbs lots of oil",  mode:"gram", cat:"Street Food"},
-  {name:"Guava (Amrud)",       em:"🍈", p:2.6, c:68,  note:"Vitamin C king; best fruit for immunity", tip:"🍈 1 guava = 68 kcal, 9g fibre, 228mg Vitamin C (5x more than orange!). Eat with skin. Best pre-workout snack. Seeds are edible and fibrous.",        mode:"count",unit:"guava",plu:"guavas",cat:"Grains & Veg"},
-  {name:"Pomegranate (Anar)",  em:"🍎", p:1.7, c:83,  note:"Rich in antioxidants & iron; anti-inflammatory", tip:"🍎 1 pomegranate = ~83 kcal. Punicalagins are the most powerful antioxidants known. Helps reduce post-workout inflammation. Eat seeds — don't juice.", mode:"count",unit:"pomegranate",plu:"pomegranates",cat:"Grains & Veg"},
-  {name:"Banana",              em:"🍌", p:1.3, c:89,  note:"Best pre-workout carb; Potassium for cramps", tip:"🍌 1 banana = 89 kcal, 23g carbs, 422mg Potassium. Eat 30 min before workout for energy. Ripe = faster energy. Green = more resistant starch for gut.",    mode:"count",unit:"banana",plu:"bananas",cat:"Grains & Veg"},
-  {name:"Peanuts / Groundnuts",em:"🥜", p:26,  c:567, note:"Cheapest protein source; Magnesium & B3", tip:"🥜 26g protein/100g — best budget protein! Roasted = easy snack. Add to salad. 30g (small handful) = 8g protein. Natural peanut butter is even better.",        mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Almonds (Badam)",     em:"🌰", p:21,  c:579, note:"Vitamin E; Healthy fats; best morning nut", tip:"🌰 Soak overnight — dramatically improves nutrient absorption. 8–10 almonds/day is ideal. Vitamin E protects muscles from oxidative damage post-workout.",      mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Walnuts (Akhrot)",   em:"🌰", p:15,  c:654, note:"Omega-3; brain health",      mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Cashews (Kaju)",     em:"🥜", p:18,  c:553, note:"Good fats; minerals",        mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Pistachios (Pista)", em:"🟢", p:20,  c:560, note:"Highest fiber nut",          mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Dates (Khajoor)",    em:"🟫", p:2.5, c:280, note:"Natural energy; Fiber",      mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Raisins (Kishmish)", em:"🍇", p:3,   c:300, note:"Iron; quick energy",         mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Pumpkin Seeds",      em:"🎃", p:30,  c:559, note:"Highest plant protein seed", mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Sunflower Seeds",    em:"🌻", p:21,  c:584, note:"Vitamin E; selenium",        mode:"gram", cat:"Nuts & Dry Fruits"},
-  {name:"Mozzarella",         em:"🫕", p:22,  c:280, note:"Pizza cheese; lower fat",    mode:"gram", cat:"Dairy & Cheese"},
-  {name:"Cheddar",            em:"🟡", p:25,  c:400, note:"Sandwich cheese; high fat",  mode:"gram", cat:"Dairy & Cheese"},
-  {name:"Feta",               em:"🧂", p:14,  c:260, note:"Salad cheese; salty",        mode:"gram", cat:"Dairy & Cheese"},
-  {name:"Parmesan",           em:"🫙", p:38,  c:431, note:"Highest protein cheese!",    mode:"gram", cat:"Dairy & Cheese"},
-  {name:"Cream (Fresh)",      em:"🍦", p:2,   c:350, note:"Pure milk fat",              mode:"gram", cat:"Dairy & Cheese"},
-  {name:"Khoa (Mawa)",        em:"🟤", p:18,  c:420, note:"Dried milk; used in sweets", mode:"gram", cat:"Dairy & Cheese"},
+  // ── HERO ITEMS (DISPLAYED FIRST) ──
+  {name:"Rajma (Cooked)", em:"🫘", p:8.7, k:127, f:6.4, mode:'gram', cat:'Protein', veg:'Veg', tip:"High Fiber (6.4g) + Protein. Best eaten at lunch for sustained energy."},
+  {name:"Milk (Buffalo/Full)", em:"🥛", p:3.8, k:100, f:0, mode:'ml', cat:'Beverages', veg:'Veg', tip:"High calcium and quality protein. Best before bed."},
+  {name:"Chickpeas (Chole)", em:"🥣", p:9, k:164, f:8, mode:'gram', cat:'Protein', veg:'Veg', tip:"Great fiber and protein combo. Supports gut health."},
+  {name:"Boiled Egg (Whole)", em:"🥚", p:6.3, k:78, f:0, mode:'count', unit:'egg', cat:'Protein', veg:'Egg', tip:"Yolk contains Vitamin D & Choline. Best bioavailable protein source."},
+  {name:"Egg White", em:"⚪", p:3.6, k:17, f:0, mode:'count', unit:'egg', cat:'Protein', veg:'Egg', tip:"Pure protein, zero fat. Eat 4-5 for a low calorie protein boost."},
+  {name:"Chicken Breast", em:"🍗", p:31, k:165, f:0, mode:'gram', cat:'Protein', veg:'Non-Veg', tip:"Highest protein density (31g/100g). Essential for muscle repair post-workout."},
+  {name:"Whey Protein", em:"🥤", p:24, k:120, f:0, mode:'count', unit:'scoop', cat:'Protein', veg:'Veg', tip:"Fast absorption. Drink within 30 mins after gym for recovery."},
+  {name:"Paneer (Raw)", em:"🧀", p:18, k:265, f:0, mode:'gram', cat:'Protein', veg:'Veg', tip:"Casein protein digests slowly. Eat at dinner to feed muscles while sleeping."},
+  {name:"Fish (Tuna/Rohu)", em:"🐟", p:22, k:200, f:0, mode:'gram', cat:'Protein', veg:'Non-Veg', tip:"Rich in Omega-3 fatty acids. Reduces muscle soreness."},
+  {name:"Soya Chunks", em:"🟤", p:52, k:345, f:13, mode:'gram', cat:'Protein', veg:'Veg', tip:"Highest plant protein (52g/100g). Cheap and effective muscle builder."},
+
+  // ── GRAINS & STAPLES ──
+  {name:"Wheat Flour (Atta)", em:"🌾", p:12, k:340, f:11, mode:'gram', cat:'Breads', veg:'Veg', tip:"Basis of Roti. High fiber content compared to Maida."},
+  {name:"Roti (Wheat)", em:"🫓", p:3, k:85, f:2.5, mode:'count', unit:'roti', cat:'Breads', veg:'Veg', tip:"Complex carb staple. 2 rotis provide ~5g fiber."},
+  {name:"White Rice", em:"🍚", p:2.7, k:130, f:0.4, mode:'gram', cat:'Grains & Veg', veg:'Veg', tip:"Fast carbs. Perfect post-workout to spike insulin and absorb protein."},
+  {name:"Brown Rice", em:"🍚", p:2.6, k:111, f:1.8, mode:'gram', cat:'Grains & Veg', veg:'Veg', tip:"Lower glycemic index than white rice. Good for lunch."},
+  {name:"Bajra (Millet)", em:"🥣", p:11, k:360, f:1.3, mode:'gram', cat:'Grains & Veg', veg:'Veg', tip:"Winter grain. Generates body heat and high satiety."},
+  {name:"Ragi", em:"🌾", p:7.3, k:330, f:11.5, mode:'gram', cat:'Grains & Veg', veg:'Veg', tip:"Highest calcium grain. Excellent for bone health."},
+  {name:"White Bread", em:"🍞", p:2, k:75, f:0.8, mode:'count', unit:'slice', cat:'Breads', veg:'Veg', tip:"Refined flour. Spikes blood sugar quickly."},
+  {name:"Brown Bread", em:"🍞", p:2.5, k:75, f:1.5, mode:'count', unit:'slice', cat:'Breads', veg:'Veg', tip:"Check label - often just colored white bread."},
+  {name:"Whole Wheat Bread", em:"🥪", p:3.3, k:72, f:2, mode:'count', unit:'slice', cat:'Breads', veg:'Veg', tip:"Good source of fiber and complex carbs."},
+  {name:"Multigrain Bread", em:"🌾", p:4.5, k:85, f:2.5, mode:'count', unit:'slice', cat:'Breads', veg:'Veg', tip:"Seeds add slight protein and healthy fats."},
+  {name:"Pav", em:"🥯", p:3.5, k:135, f:1, mode:'count', unit:'pc', cat:'Breads', veg:'Veg', tip:"Refined flour bun. Dense calories."},
+  {name:"Kulcha (Plain)", em:"🫓", p:5, k:175, f:1, mode:'count', unit:'pc', cat:'Breads', veg:'Veg', tip:"Made of maida. Occasional treat."},
+  {name:"Burger Bun", em:"🍔", p:5, k:165, f:1, mode:'count', unit:'pc', cat:'Breads', veg:'Veg', tip:"Higher calorie than regular bread slices."},
+
+  // ── DALS (COOKED) ──
+  {name:"Toor Dal (Cooked)", em:"🥣", p:7.2, k:120, f:4.5, mode:'count', unit:'bowl', cat:'Protein', veg:'Veg', tip:"Standard daily protein source. Combine with rice."},
+  {name:"Moong Dal (Cooked)", em:"🥣", p:6.8, k:105, f:4.2, mode:'count', unit:'bowl', cat:'Protein', veg:'Veg', tip:"Lightest on stomach. Easy to digest."},
+  {name:"Masoor Dal (Cooked)", em:"🥣", p:9, k:130, f:5.5, mode:'count', unit:'bowl', cat:'Protein', veg:'Veg', tip:"High protein and cooks fast."},
+  {name:"Chana Dal (Cooked)", em:"🥣", p:6.5, k:135, f:5, mode:'count', unit:'bowl', cat:'Protein', veg:'Veg', tip:"Low GI dal. Good for diabetics."},
+
+  // ── NORTH INDIAN ──
+  {name:"Dal Makhani", em:"🥘", p:11, k:400, f:8, mode:'count', unit:'bowl', cat:'North Indian', veg:'Veg', tip:"Tasty but high calorie due to butter/cream. Eat in moderation."},
+  {name:"Kali Dal", em:"🥣", p:9, k:200, f:6, mode:'count', unit:'bowl', cat:'North Indian', veg:'Veg', tip:"Lighter than Dal Makhani. Good protein & fiber source."},
+  {name:"Chole Bhature", em:"🥟", p:16.5, k:700, f:8, mode:'count', unit:'plate', cat:'North Indian', veg:'Veg', tip:"High calorie/fat meal. Treat meal."},
+  {name:"Chole Kulche", em:"🥙", p:13.5, k:500, f:8, mode:'count', unit:'plate', cat:'North Indian', veg:'Veg', tip:"Slightly better than bhature but still refined flour."},
+  {name:"Chole Rice", em:"🍛", p:11, k:400, f:7, mode:'count', unit:'plate', cat:'North Indian', veg:'Veg', tip:"Comfort food. Good fiber from chole."},
+
+  // ── SOUTH INDIAN ──
+  {name:"Dosa (Plain)", em:"🥞", p:3.5, k:160, f:1, mode:'count', unit:'dosa', cat:'South Indian', veg:'Veg', tip:"Fermented batter is good for gut health."},
+  {name:"Masala Dosa", em:"🥔", p:5.5, k:325, f:3, mode:'count', unit:'dosa', cat:'South Indian', veg:'Veg', tip:"Potato filling adds significant calories and carbs."},
+  {name:"Idli (2pcs)", em:"⚪", p:3.5, k:120, f:1, mode:'count', unit:'plate', cat:'South Indian', veg:'Veg', tip:"Steamed and oil-free. Very healthy carb source."},
+  {name:"Sambar", em:"🥘", p:3.5, k:90, f:3, mode:'count', unit:'bowl', cat:'South Indian', veg:'Veg', tip:"Loaded with veggies and lentils."},
+  {name:"Curd Rice", em:"🥣", p:9, k:275, f:0.5, mode:'count', unit:'bowl', cat:'South Indian', veg:'Veg', tip:"Excellent probiotic and cooling for stomach."},
+  {name:"Sambar Rice", em:"🍛", p:7, k:265, f:3, mode:'count', unit:'bowl', cat:'South Indian', veg:'Veg', tip:"Complete amino acid profile (grain+legume)."},
+
+  // ── VEG & FRUITS ──
+  {name:"Banana", em:"🍌", p:1.1, k:105, f:2.6, mode:'count', unit:'banana', cat:'Fruits', veg:'Veg', tip:"Potassium powerhouse. Take 2-3 before workouts for energy."},
+  {name:"Mango", em:"🥭", p:0.8, k:60, f:1.6, mode:'gram', cat:'Fruits', veg:'Veg', tip:"High sugar content. Enjoy seasonally but limit quantity."},
+  {name:"Guava", em:"🍈", p:2.6, k:68, f:5.4, mode:'count', unit:'guava', cat:'Fruits', veg:'Veg', tip:"One of the highest fiber fruits. Great for digestion."},
+  {name:"Apple", em:"🍎", p:0.3, k:52, f:2.4, mode:'count', unit:'apple', cat:'Fruits', veg:'Veg', tip:"Pectin fiber helps keep you full."},
+  {name:"Potato (Boiled)", em:"🥔", p:2, k:87, f:1.8, mode:'gram', cat:'Grains & Veg', veg:'Veg', tip:"Cooled potatoes have resistant starch (good for gut)."},
+  {name:"Bhindi (Okra)", em:"🌿", p:1.9, k:33, f:3.2, mode:'gram', cat:'Grains & Veg', veg:'Veg', tip:"Low calorie volume food. High soluble fiber."},
+  {name:"Broccoli", em:"🥦", p:2.8, k:34, f:2.6, mode:'gram', cat:'Grains & Veg', veg:'Veg', tip:"Micronutrient powerhouse. Vitamin C & K."},
+  {name:"Spinach", em:"🌿", p:2.9, k:23, f:2.2, mode:'gram', cat:'Grains & Veg', veg:'Veg', tip:"Iron rich. Low calorie volume food."},
+
+  // ── STREET FOOD & SNACKS ──
+  {name:"Samosa", em:"🥟", p:3.5, k:275, f:1, mode:'count', unit:'pc', cat:'Street Food', veg:'Veg', tip:"High calorie density (fried). Avoid if cutting fat."},
+  {name:"Kachori", em:"🍘", p:4.5, k:225, f:1.5, mode:'count', unit:'pc', cat:'Street Food', veg:'Veg', tip:"Deep fried lentil snack. High fat."},
+  {name:"Aloo Tikki", em:"🥔", p:2, k:175, f:1.5, mode:'count', unit:'pc', cat:'Street Food', veg:'Veg', tip:"Fried potato. Low protein."},
+  {name:"Aloo Chaat", em:"🥗", p:3.5, k:325, f:3, mode:'count', unit:'plate', cat:'Street Food', veg:'Veg', tip:"Better than deep fried snacks if made with less oil."},
+  {name:"Pani Puri (5pcs)", em:"🫧", p:2, k:135, f:1, mode:'count', unit:'plate', cat:'Street Food', veg:'Veg', tip:"Low protein, mostly carb/water. Treat food."},
+  {name:"French Fries (100g)", em:"🍟", p:3.5, k:320, f:3, mode:'gram', cat:'Street Food', veg:'Veg', tip:"Very high calorie density due to oil absorption."},
+  {name:"Dhokla", em:"🟨", p:6, k:160, f:1.2, mode:'count', unit:'plate', cat:'Snacks', veg:'Veg', tip:"Steamed and fermented. Healthier snack option."},
+  {name:"Bhujia", em:"🍜", p:12, k:550, f:10, mode:'gram', cat:'Snacks', veg:'Veg', tip:"High protein from Besan but deep fried. Eat small portions."},
+  {name:"Veg Momos (Steamed)", em:"🥟", p:6, k:225, f:1.5, mode:'count', unit:'plate', cat:'Chinese/Momos', veg:'Veg', tip:"Steamed is healthier. 6pcs per plate."},
+  {name:"Veg Momos (Fried)", em:"🥟", p:6, k:400, f:1.5, mode:'count', unit:'plate', cat:'Chinese/Momos', veg:'Veg', tip:"Avoid fried momos - nearly double the calories."},
+  {name:"Chicken Momos", em:"🍗", p:13.5, k:325, f:1, mode:'count', unit:'plate', cat:'Chinese/Momos', veg:'Non-Veg', tip:"Good protein content for a snack."},
+  {name:"Veg Noodles", em:"🍜", p:9, k:500, f:3, mode:'count', unit:'plate', cat:'Chinese/Momos', veg:'Veg', tip:"High carb and usually high sodium."},
+
+  // ── EXTRAS ──
+  {name:"Tofu", em:"⬜", p:10, k:76, f:1, mode:'gram', cat:'Protein', veg:'Veg', tip:"Lean vegan protein. Low calorie alternative to paneer."},
+  {name:"Peanut Butter", em:"🥜", p:4, k:95, f:1, mode:'count', unit:'tbsp', cat:'Snacks', veg:'Veg', tip:"Healthy fats & protein. Good on toast or in shakes."},
+  {name:"Almonds (10pcs)", em:"🌰", p:2.5, k:70, f:1.5, mode:'count', unit:'srv', cat:'Snacks', veg:'Veg', tip:"Healthy fats & Vitamin E. Good for brain."},
+  {name:"Peanuts", em:"🥜", p:26, k:567, f:9, mode:'gram', cat:'Snacks', veg:'Veg', tip:"Cheapest protein source. High calorie so measure portions."},
+  {name:"Tea (Chai)", em:"☕", p:1, k:70, f:0, mode:'count', unit:'cup', cat:'Beverages', veg:'Veg', tip:"Relaxant. Watch sugar intake."},
+  {name:"Lassi (Sweet)", em:"🥤", p:4, k:180, f:0, mode:'ml', cat:'Beverages', veg:'Veg', tip:"Probiotic but high sugar. Choose salted for health."}
 ];
 
-// ===================== CALCULATOR =====================
-let selIdx=0, meal=[], visF=foodData.map((_,i)=>i), activeCat='All';
+const budgetPlans = {
+  'Veg': {
+    u120: [
+      {n: "Soya Chunks (50g)", p: 26, note:"Highest value"}, 
+      {n: "Milk (500ml)", p: 19, note:"Calcium + Prot"}, 
+      {n: "Toor Dal (2 bowls)", p: 14, note:"Staple"}, 
+      {n: "Peanuts (30g)", p: 8, note:"Healthy Fat"},
+      {n: "Curd (100g)", p: 3, note:"Gut health"}
+    ],
+    u200: [
+      {n: "Paneer (200g)", p: 36, note:"Main source"}, 
+      {n: "Soya Chunks (40g)", p: 20, note:"Booster"}, 
+      {n: "Milk (500ml)", p: 19, note:"Drink"}, 
+      {n: "Dal + Rice", p: 12, note:"Meal"}, 
+      {n: "Whey Sachet (1)", p: 24, note:"If deal avail"}
+    ]
+  },
+  'Egg': {
+    u120: [
+      {n: "Eggs (6 Whole)", p: 37, note:"₹42 approx"}, 
+      {n: "Soya Chunks (30g)", p: 15, note:"Cheap boost"}, 
+      {n: "Milk (250ml)", p: 9, note:"Drink"}, 
+      {n: "Dal + Rice", p: 10, note:"Meal"}, 
+      {n: "Bananas (2)", p: 2, note:"Energy"}
+    ],
+    u200: [
+      {n: "Eggs (10 - 2 whole, 8 white)", p: 42, note:"Core"}, 
+      {n: "Chicken Breast (100g)", p: 31, note:"Meat add"}, 
+      {n: "Oats + Milk", p: 14, note:"Breakfast"}, 
+      {n: "Bread/Roti", p: 8, note:"Carbs"}
+    ]
+  },
+  'Non-Veg': {
+    u120: [
+      {n: "Chicken Breast (150g)", p: 46, note:"High value"}, 
+      {n: "Eggs (2)", p: 12, note:"Add-on"}, 
+      {n: "Dal + Rice", p: 12, note:"Filler"}, 
+      {n: "Seasonal Fruit", p: 1, note:"Vit C"}
+    ],
+    u200: [
+      {n: "Chicken Breast (250g)", p: 77, note:"Massive protein"}, 
+      {n: "Eggs (4)", p: 25, note:"Breakfast"}, 
+      {n: "Curd", p: 6, note:"Digestion"}, 
+      {n: "Rice/Roti", p: 8, note:"Carbs"}
+    ]
+  }
+};
 
-// Quick-access food names in order
-const quickFoodNames=["Egg (Whole Boiled)","Whey Protein Scoop","Milk (Full Fat)","Soya Chunks","Chicken Breast","Dal (Lentils)","Chickpeas (Chole)","Roti (Wheat)","Fish / Tuna","Tofu"];
+const mealTimingData = {
+  'Veg': [
+    { t: "🌅 Breakfast (8:00 AM)", d: "Oats Porridge + Milk + Almonds + Whey (Optional). Complex carbs for sustained energy." },
+    { t: "🥪 Lunch (1:00 PM)", d: "Dal/Rajma + Roti/Rice + Curd + Salad. Complete protein combination." },
+    { t: "🏋️ Pre-Workout (5:00 PM)", d: "Banana + Black Coffee. Fast carbs for immediate fuel." },
+    { t: "💪 Post-Workout (7:00 PM)", d: "Whey Protein / Paneer / Soya chunks. Critical for recovery." },
+    { t: "🌙 Dinner (9:00 PM)", d: "Paneer/Tofu Stir-fry + Salad. Low carb, slow-digesting protein." }
+  ],
+  'Egg': [
+    { t: "🌅 Breakfast (8:00 AM)", d: "3 Boiled Eggs (1 whole) + Toast/Oats. High bio-available protein start." },
+    { t: "🥪 Lunch (1:00 PM)", d: "Dal + Rice + 2 Egg Omelette. Fiber + Protein balance." },
+    { t: "🏋️ Pre-Workout (5:00 PM)", d: "Banana / Apple + Coffee. Energy boost." },
+    { t: "💪 Post-Workout (7:00 PM)", d: "4-5 Egg Whites / Whey Protein. Pure protein for repair." },
+    { t: "🌙 Dinner (9:00 PM)", d: "Egg Bhurji + Roti + Salad. Light on stomach, high protein." }
+  ],
+  'Non-Veg': [
+    { t: "🌅 Breakfast (8:00 AM)", d: "Eggs + Toast / Chicken Sausage. Solid protein foundation." },
+    { t: "🥪 Lunch (1:00 PM)", d: "Chicken Breast/Curry + Rice + Salad. High protein density." },
+    { t: "🏋️ Pre-Workout (5:00 PM)", d: "Banana + Coffee. Glycogen top-up." },
+    { t: "💪 Post-Workout (7:00 PM)", d: "Whey Protein / Grilled Chicken. Max anabolic response." },
+    { t: "🌙 Dinner (9:00 PM)", d: "Grilled Fish / Chicken + Veggies. Lean protein, healthy fats (fish)." }
+  ]
+};
 
-function buildQuickFoods(){
-  const el=document.getElementById('quickFoods');
-  quickFoodNames.forEach(name=>{
-    const idx=foodData.findIndex(f=>f.name===name);
-    if(idx<0) return;
-    const f=foodData[idx];
-    const btn=document.createElement('button');
-    btn.className='qf-chip';
-    btn.innerHTML=`<span class="qf-em">${f.em}</span>${f.name.split(' ')[0]}`;
-    btn.onclick=()=>{
-      document.querySelectorAll('.qf-chip').forEach(b=>b.classList.remove('qf-sel'));
-      btn.classList.add('qf-sel');
-      // clear cat filter so item is always visible
-      activeCat='All';
-      document.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('active'));
-      document.querySelector('.cat-chip').classList.add('active');
-      document.getElementById('searchInput').value='';
-      visF=foodData.map((_,i)=>i);
-      selFood(idx);
-      // scroll food grid to show selected
-      const cards=document.querySelectorAll('.food-card');
-      const pos=visF.indexOf(idx);
-      if(cards[pos]) cards[pos].scrollIntoView({block:'nearest'});
-    };
-    el.appendChild(btn);
-  });
+// STATE
+let currentMeal = [];
+let logTotalP = 0;
+let selectedFoodIdx = 0;
+let activeCat = 'All';
+
+// INIT
+function init(){
+  renderCat();
+  renderFoodGrid();
+  selectFood(0);
+  renderBudget('Veg');
+  renderTiming('Veg');
 }
 
-function buildCatBar(){
-  const el=document.getElementById('catScroll');
-  categories.forEach(cat=>{
-    const c=document.createElement('button');
-    c.className='cat-chip'+(cat==='All'?' active':'');
-    c.textContent=cat;
-    c.onclick=()=>{
-      document.querySelectorAll('.cat-chip').forEach(x=>x.classList.remove('active'));
-      c.classList.add('active'); activeCat=cat; filterFoods();
-      document.querySelectorAll('.qf-chip').forEach(b=>b.classList.remove('qf-sel'));
-    };
-    el.appendChild(c);
-  });
+// ══════════════════════════════════════════════
+// CALCULATOR UI
+// ══════════════════════════════════════════════
+function renderCat(){
+  document.getElementById('catScroll').innerHTML = categories.map(c => 
+    `<button class="cat-chip ${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</button>`
+  ).join('');
+}
+function setCat(c){ activeCat=c; renderCat(); filterFoods(); }
+
+function renderFoodGrid(list=foodData){
+  document.getElementById('foodGrid').innerHTML = list.map((f,i) => {
+    const origIdx = foodData.indexOf(f);
+    return `<div class="food-card ${selectedFoodIdx===origIdx?'selected':''}" onclick="selectFood(${origIdx})">
+      <span class="em">${f.em}</span>
+      <div class="fn">${f.name}</div>
+      <div class="fp">${f.p}g P</div>
+      <div class="fib">${f.f}g Fib</div>
+    </div>`;
+  }).join('');
 }
 
 function filterFoods(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  visF=foodData.map((_,i)=>i).filter(i=>{
-    const f=foodData[i];
-    const matchCat=activeCat==='All'||f.cat===activeCat;
-    const matchQ=!q||f.name.toLowerCase().includes(q);
-    return matchCat&&matchQ;
-  });
-  if(!visF.includes(selIdx)&&visF.length>0) selIdx=visF[0];
-  renderGrid();
+  const term = document.getElementById('searchInput').value.toLowerCase();
+  // Filter entire database, regardless of initial view limit
+  const list = foodData.filter(f => (activeCat==='All'||f.cat===activeCat) && f.name.toLowerCase().includes(term));
+  renderFoodGrid(list);
 }
 
-function renderGrid(){
-  const g=document.getElementById('foodGrid'); g.innerHTML='';
-  visF.forEach(i=>{
-    const f=foodData[i];
-    const d=document.createElement('div');
-    d.className='food-card'+(i===selIdx?' selected':'');
-    const perLabel=f.mode==='count'?f.unit:f.mode==='ml'?'100ml':'100g';
-    d.innerHTML=`<span class="em">${f.em}</span><div class="fn">${f.name}</div><div class="fp">${f.p}g protein</div><div class="fu">per ${perLabel}</div>`;
-    d.onclick=()=>selFood(i);
-    g.appendChild(d);
-  });
-  updQtyUI(); updatePreview();
-}
-
-function selFood(i){selIdx=i;renderGrid();}
-
-// Smart quick-button presets per food name
-const smartQtys={
-  // Eggs
-  "Egg (Whole Boiled)":    {vals:[1,4,6,8],    labels:['1 egg','4 eggs','6 eggs','8 eggs'],    step:1},
-  "Egg White Only":        {vals:[1,3,5,8],     labels:['1 white','3 whites','5 whites','8 whites'],step:1},
-  // Protein shakes
-  "Whey Protein Scoop":    {vals:[1,2,3],       labels:['1 scoop','2 scoops','3 scoops'],       step:1},
-  // Rotis
-  "Roti (Wheat)":          {vals:[1,2,4,6],     labels:['1 roti','2 rotis','4 rotis','6 rotis'],step:1},
-  // Street food
-  "Vada Pav":              {vals:[1,2],         labels:['1 vada pav','2 vada pavs'],             step:1},
-  "Samosa":                {vals:[1,2,3],       labels:['1 samosa','2 samosas','3 samosas'],     step:1},
-  "Pani Puri (6 pcs)":    {vals:[1,2,3],       labels:['6 pcs','12 pcs','18 pcs'],              step:1},
-  // Fruits (count)
-  "Guava (Amrud)":         {vals:[1,2,3],       labels:['1 guava','2 guavas','3 guavas'],        step:1},
-  "Pomegranate (Anar)":    {vals:[1,2],         labels:['1 pomegranate','2 pomegranates'],       step:1},
-  "Banana":                {vals:[1,2,3,4],     labels:['1 banana','2 bananas','3 bananas','4 bananas'],step:1},
-};
-// Gram-based presets by category keyword
-function getGramPresets(name){
-  const n=name.toLowerCase();
-  if(n.includes('chana')||n.includes('chickpea')||n.includes('chole')||n.includes('peanut')||n.includes('groundnut'))
-    return {vals:[30,50,100,150],labels:['30g','50g','100g','150g'],step:10};
-  if(n.includes('soya'))
-    return {vals:[50,100,150,200],labels:['50g','100g','150g','200g'],step:25};
-  if(n.includes('chicken')||n.includes('fish')||n.includes('tuna')||n.includes('paneer')||n.includes('tofu'))
-    return {vals:[100,150,200,250],labels:['100g','150g','200g','250g'],step:25};
-  if(n.includes('oat')||n.includes('dal')||n.includes('sattu'))
-    return {vals:[30,50,80,100],labels:['30g','50g','80g','100g'],step:10};
-  if(n.includes('almond')||n.includes('walnut')||n.includes('cashew')||n.includes('pistachio')||n.includes('pumpkin seed')||n.includes('sunflower'))
-    return {vals:[15,20,30,50],labels:['15g','20g','30g','50g'],step:5};
-  return null; // default
-}
-
-function updQtyUI(){
-  const f=foodData[selIdx];
-  if(!f) return;
-  const isCnt=f.mode==='count', isMl=f.mode==='ml';
-  let label='Quantity (grams)', ulabel='g';
-  if(isCnt){label=`Quantity (${f.plu})`;ulabel=f.unit;}
-  else if(isMl){label='Quantity (ml)';ulabel='ml';}
-  document.getElementById('qtyLabel').textContent=label;
-  document.getElementById('qtyUL').textContent=ulabel;
-
-  const qb=document.getElementById('quickBtns');
-  let preset=null, defaultVal=null;
-
-  if(isCnt){
-    preset=smartQtys[f.name]||{vals:[1,2,3,4],labels:['1','2','3','4'],step:1};
-    defaultVal=preset.vals[0];
-  } else if(isMl){
-    preset={vals:[100,150,200,300],labels:['100ml','150ml','200ml','300ml'],step:50};
-    defaultVal=200;
-  } else {
-    const gp=getGramPresets(f.name);
-    preset=gp||{vals:[50,100,150,200],labels:['50g','100g','150g','200g'],step:10};
-    defaultVal=preset.vals[1]||100;
-  }
-
-  const inp=document.getElementById('weightInput');
-  // Only reset if value looks wrong for mode
-  if(isCnt && parseFloat(inp.value)>20) inp.value=defaultVal;
-  else if(!isCnt && parseFloat(inp.value)<2) inp.value=defaultVal;
-
-  qb.innerHTML=preset.vals.map((v,i)=>`<button class="qb" onclick="setW(${v},this)">${preset.labels[i]}</button>`).join('');
+function selectFood(idx){
+  selectedFoodIdx = idx;
+  renderFoodGrid();
+  const f = foodData[idx];
+  document.getElementById('nutrTipText').innerHTML = f.tip;
+  document.getElementById('nutrTip').classList.add('vis');
   
-  // Highlight matching button
-  highlightQBtn(parseFloat(inp.value));
-  
-  // Show nutrition tip
-  const tipEl=document.getElementById('nutrTip');
-  const tipTxt=document.getElementById('nutrTipText');
-  if(f.tip){tipEl.classList.add('vis');tipTxt.textContent=f.tip;}
-  else{tipEl.classList.remove('vis');}
-}
-
-function highlightQBtn(val){
-  document.querySelectorAll('#quickBtns .qb').forEach(b=>{
-    b.classList.toggle('qb-active', parseFloat(b.textContent)===val||b.getAttribute('onclick').includes('('+val+','));
-  });
-}
-
-function adjQty(dir){
-  const f=foodData[selIdx];
-  if(!f) return;
-  let step=10;
-  if(f.mode==='count') step=1;
-  else if(f.mode==='ml') step=50;
-  else{
-    const gp=getGramPresets(f.name);
-    if(gp) step=gp.step;
-  }
-  const inp=document.getElementById('weightInput');
-  inp.value=Math.max(f.mode==='count'?1:f.mode==='ml'?50:10,(parseFloat(inp.value)||step)+dir*step);
-  updatePreview();
-  highlightQBtn(parseFloat(inp.value));
-}
-
-function setW(w,btn){
-  document.getElementById('weightInput').value=w;
-  document.querySelectorAll('#quickBtns .qb').forEach(b=>b.classList.remove('qb-active'));
-  if(btn) btn.classList.add('qb-active');
+  const inp = document.getElementById('weightInput');
+  const unit = document.getElementById('qtyUnit');
+  if(f.mode==='count'){ inp.value=1; unit.innerText=f.unit+'s'; renderQB([1,2,3,4,6]); }
+  else if(f.mode==='ml'){ inp.value=200; unit.innerText='ml'; renderQB([100,200,250,500]); }
+  else{ inp.value=100; unit.innerText='g'; renderQB([50,100,150,200]); }
   updatePreview();
 }
+
+function renderQB(arr){
+  document.getElementById('quickBtns').innerHTML = arr.map(v=>`<button class="qb" onclick="setQty(${v})">${v}</button>`).join('');
+}
+function setQty(v){ document.getElementById('weightInput').value=v; updatePreview(); }
+function adjQty(d){ const i=document.getElementById('weightInput'); i.value=Math.max(0.5, parseFloat(i.value)+d); updatePreview(); }
 
 function updatePreview(){
-  const f=foodData[selIdx];
-  const qty=parseFloat(document.getElementById('weightInput').value)||1;
-  const bar=document.getElementById('prevBar');
-  if(!f){bar.classList.remove('vis');return;}
-  bar.classList.add('vis');
-  let protein,cals,qLbl;
-  if(f.mode==='count'){protein=(f.p*qty).toFixed(1);cals=(f.c*qty).toFixed(0);qLbl=`${qty} ${qty==1?f.unit:f.plu}`;}
-  else{protein=((f.p/100)*qty).toFixed(1);cals=((f.c/100)*qty).toFixed(0);qLbl=`${qty}${f.mode==='ml'?'ml':'g'}`;}
-  document.getElementById('prevName').textContent=`${f.em} ${f.name} — ${qLbl}`;
-  document.getElementById('prevP').textContent=protein+'g';
-  document.getElementById('prevC').textContent=cals+' kcal';
-  document.getElementById('prevNote').textContent=f.note;
+  const f=foodData[selectedFoodIdx];
+  const qty=parseFloat(document.getElementById('weightInput').value);
+  const m=f.mode==='count'?qty:(qty/100);
+  document.getElementById('prevName').innerText=`${f.em} ${f.name}`;
+  document.getElementById('prevP').innerText=(f.p*m).toFixed(1)+'g';
+  document.getElementById('prevC').innerText=Math.round(f.k*m);
+  document.getElementById('prevF').innerText=(f.f*m).toFixed(1)+'g';
+  document.getElementById('prevBar').classList.add('vis');
 }
 
 function addToMeal(){
-  const f=foodData[selIdx];
+  const f=foodData[selectedFoodIdx];
   const qty=parseFloat(document.getElementById('weightInput').value);
-  if(!f||!qty||qty<=0){showToast('⚠️ Enter a valid quantity');return;}
-  let protein,cals,dQty;
-  if(f.mode==='count'){protein=parseFloat((f.p*qty).toFixed(1));cals=parseFloat((f.c*qty).toFixed(0));dQty=`${qty} ${qty==1?f.unit:f.plu}`;}
-  else{protein=parseFloat(((f.p/100)*qty).toFixed(1));cals=parseFloat(((f.c/100)*qty).toFixed(0));dQty=`${qty}${f.mode==='ml'?'ml':'g'}`;}
-  meal.push({name:f.name,em:f.em,note:f.note,dQty,protein,cals});
-  updMeal(); showToast(`✅ ${f.name} (${dQty}) added!`);
+  const m=f.mode==='count'?qty:(qty/100);
+  currentMeal.push({n:f.name, p:f.p*m, k:f.k*m, f:f.f*m, q:qty, u:f.mode==='count'?f.unit:(f.mode==='ml'?'ml':'g'), veg:f.veg});
+  renderMeal();
+  showToast('✅ Added to Plate');
 }
 
-function removeMeal(i){meal.splice(i,1);updMeal();}
-function clearMeal(){if(!meal.length)return;meal=[];updMeal();showToast('🗑️ Plate cleared');}
-
-function updMeal(){
-  const tP=meal.reduce((s,m)=>s+m.protein,0);
-  const tC=meal.reduce((s,m)=>s+m.cals,0);
-  document.getElementById('totalP').textContent=tP.toFixed(1);
-  document.getElementById('totalC').textContent=Math.round(tC);
-  const pp=Math.min(100,(tP/60)*100),cp=Math.min(100,(tC/2000)*100);
-  document.getElementById('pBar').style.width=pp+'%';
-  document.getElementById('cBar').style.width=cp+'%';
-  document.getElementById('pPct').textContent=Math.round(pp)+'%';
-  document.getElementById('cPct').textContent=Math.round(cp)+'%';
+function renderMeal(){
+  let tp=0, tc=0, tf=0;
   const el=document.getElementById('mealItems');
-  if(!meal.length){el.innerHTML='<div class="empty"><div class="ei">🍽️</div><p>Your plate is empty.<br/>Select a food and add it!</p></div>';return;}
-  el.innerHTML='';
-  meal.forEach((item,i)=>{
-    const d=document.createElement('div');d.className='ml-entry';
-    d.innerHTML=`<span class="me-ic">${item.em}</span><div class="me-if"><div class="mn">${item.name} <span style="color:var(--mu);font-weight:400;font-size:10px">${item.dQty}</span></div><div class="mnt">${item.note}</div></div><div class="me-nu"><div class="mp">${item.protein}g</div><div class="mk">${item.cals} kcal</div></div><button class="me-del" onclick="removeMeal(${i})">✕</button>`;
-    el.appendChild(d);
+  if(!currentMeal.length){
+    el.innerHTML='<div style="text-align:center;padding:30px;color:var(--mu);font-size:13px">Plate is empty.<br>Select a food to start.</div>';
+    document.getElementById('analyzeBtn').style.display='none';
+  } else {
+    el.innerHTML = currentMeal.map((x,i)=>{
+      tp+=x.p; tc+=x.k; tf+=x.f;
+      return `<div class="ml-entry"><div class="me-if"><div style="font-weight:700;font-size:12px">${x.n}</div><div style="font-size:11px;color:var(--mu)">${x.q}${x.u}</div></div><div class="me-nu"><div>${x.p.toFixed(1)}g P</div></div><button class="me-del" onclick="remItem(${i})">×</button></div>`;
+    }).join('');
+    document.getElementById('analyzeBtn').style.display='block';
+  }
+  document.getElementById('totalP').innerText=tp.toFixed(1);
+  document.getElementById('totalC').innerText=Math.round(tc);
+  document.getElementById('totalF').innerText=tf.toFixed(1);
+}
+function remItem(i){ currentMeal.splice(i,1); renderMeal(); }
+
+// ══════════════════════════════════════════════
+// ANALYSIS & GAP LOGIC
+// ══════════════════════════════════════════════
+function analyzeAndLog(){
+  let plateP = 0;
+  currentMeal.forEach(x => plateP += x.p);
+  logTotalP = plateP;
+  
+  const cont = document.getElementById('dailyLogContainer');
+  cont.innerHTML = `<div class="ml-entry" style="background:#E8F5E9;padding:12px;border-radius:10px;"><div class="me-if"><b>Current Plate</b></div><div class="me-nu" style="color:var(--gr);font-weight:700;font-size:14px;">${plateP.toFixed(1)}g Protein</div></div>`;
+  document.getElementById('logTotalP').innerText = logTotalP.toFixed(1)+'g';
+  
+  switchTab('diet');
+}
+
+function calcGap(){
+  const w = parseFloat(document.getElementById('gapWeight').value) || 70;
+  const dietType = document.getElementById('gapDiet').value;
+  const target = w * 2;
+  const gap = Math.max(0, target - logTotalP);
+  
+  const msgEl = document.getElementById('gapMsg');
+  const sugEl = document.getElementById('gapSugList');
+  const resEl = document.getElementById('gapResult');
+  
+  resEl.classList.add('vis');
+  
+  if(gap <= 0){
+    msgEl.innerHTML = `🎉 Amazing! You hit ${logTotalP.toFixed(1)}g (Target: ${target}g)`;
+    sugEl.innerHTML = '<div style="text-align:center;color:var(--gr)">Goal reached! Maintain this.</div>';
+    return;
+  }
+  
+  msgEl.innerHTML = `⚠️ Missing: <span style="color:#C62828">${gap.toFixed(1)}g</span> Protein<br><span style="font-size:11px;font-weight:400;color:var(--mu)">Target: ${target}g (2g/kg for ${w}kg)</span>`;
+  
+  let candidates = foodData.filter(f => {
+    if(f.cat !== 'Protein') return false;
+    if(dietType === 'Veg' && f.veg !== 'Veg') return false;
+    if(dietType === 'Egg' && f.veg === 'Non-Veg') return false;
+    return !currentMeal.some(m => m.n === f.name); 
   });
+  
+  candidates.sort((a,b) => b.p - a.p);
+  const top3 = candidates.slice(0, 3);
+  
+  sugEl.innerHTML = top3.map(s => `
+    <div class="gap-sug-item">
+      <div style="font-size:24px">${s.em}</div>
+      <div>
+        <div style="font-weight:700;font-size:13px">${s.name}</div>
+        <div style="font-size:11px;color:var(--mu)">+${s.p}g Prot per serv • ${s.veg}</div>
+        <div style="font-size:10px;color:#1565C0;margin-top:2px;">${s.tip}</div>
+      </div>
+    </div>
+  `).join('');
+  
+  if(top3.length === 0) {
+    sugEl.innerHTML = '<div style="padding:10px;text-align:center">Add more quantity of your current items!</div>';
+  }
+}
+
+// ══════════════════════════════════════════════
+// BUDGET PLANS
+// ══════════════════════════════════════════════
+function renderBudget(type, btn){
+  if(btn){
+    document.querySelectorAll('#tab-budget .cat-chip').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const p = budgetPlans[type];
+  const calcTot = (arr) => arr.reduce((acc, curr)=>acc+curr.p, 0);
+  
+  const html = `
+    <div class="budget-card">
+      <div class="bc-hdr u120">Under ₹120 / Day</div>
+      <div class="bc-body">
+        ${p.u120.map(x=>`<div class="bc-row"><span>${x.n}</span><div style="text-align:right"><strong>${x.p}g P</strong><div style="font-size:9px;color:var(--mu)">${x.note}</div></div></div>`).join('')}
+        <div class="bc-total"><span>Total Protein</span><span>~${calcTot(p.u120)}g</span></div>
+      </div>
+    </div>
+    <div class="budget-card">
+      <div class="bc-hdr u200">Under ₹200 / Day</div>
+      <div class="bc-body">
+        ${p.u200.map(x=>`<div class="bc-row"><span>${x.n}</span><div style="text-align:right"><strong>${x.p}g P</strong><div style="font-size:9px;color:var(--mu)">${x.note}</div></div></div>`).join('')}
+        <div class="bc-total"><span>Total Protein</span><span>~${calcTot(p.u200)}g</span></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('budgetContainer').innerHTML = html;
+}
+
+// ══════════════════════════════════════════════
+// MEAL TIMING RENDERER
+// ══════════════════════════════════════════════
+function renderTiming(type, btn){
+  if(btn){
+    document.querySelectorAll('#tab-timing .cat-chip').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const data = mealTimingData[type];
+  document.getElementById('timingContainer').innerHTML = data.map(m => `
+    <div class="ml-entry">
+      <div class="me-if">
+        <div style="font-weight:700">${m.t}</div>
+        <div style="font-size:11px;color:var(--mu);margin-top:4px;line-height:1.4">${m.d}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════════════════
+// BMI
+// ══════════════════════════════════════════════
+function calcBMI(){
+  const w = parseFloat(document.getElementById('bmiW').value);
+  const h = parseFloat(document.getElementById('bmiH').value);
+  if(!w || !h) return;
+  
+  const hM = h/100;
+  const bmi = (w / (hM*hM)).toFixed(1);
+  
+  let cat = '', msg = '';
+  if(bmi<18.5){ cat='Underweight'; msg='Calorie surplus needed. Add shakes, nuts, and healthy fats.'; }
+  else if(bmi<25){ cat='Normal'; msg='Great! Maintain with 1.5g protein/kg and resistance training.'; }
+  else if(bmi<30){ cat='Overweight'; msg='Slight deficit needed. Cut sugar, increase fiber (salad) and protein.'; }
+  else{ cat='Obese'; msg='High protein diet + 500 kcal deficit. Focus on volume eating (veggies).'; }
+  
+  document.getElementById('bmiVal').innerText = bmi;
+  document.getElementById('bmiCat').innerText = cat;
+  document.getElementById('bmiMsg').innerText = msg;
+  document.getElementById('bmiResultBox').classList.add('vis');
+}
+
+// UTILS
+function switchTab(t, btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  if(btn){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  window.scrollTo(0,0);
 }
 
 function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
+  const t = document.getElementById('toast');
+  t.innerText = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
 }
 
-function switchTab(tab,btn){
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');if(b.id==='compare-tab-btn'){b.style.background='#fff';b.style.color='#1A6B3C';b.style.borderColor='#1A6B3C';b.style.boxShadow='';}});
-  document.getElementById('tab-'+tab).classList.add('active');
-  btn.classList.add('active');
-  if(tab==='compare'){btn.style.background='#1A6B3C';btn.style.color='#fff';btn.style.borderColor='#1A6B3C';btn.style.boxShadow='0 3px 12px rgba(26,107,60,.35)';}
-}
-
-// ===================== DIET PLANS =====================
-const dietPlans=[
-  {id:1,title:"🥦 High-Protein Vegetarian",badge:"Option 1 · Vegetarian",bc:"#1A6B3C",bb:"#E6F7EE",focus:"Grains + legumes + plant protein shake.",protein:"~80–85g",
-   meals:[{t:"Breakfast",em:"🌅",items:["Oats porridge with skim milk","Handful of almonds / walnuts","🥛 1 scoop Plant Protein (~24g)"],p:"~34g"},{t:"Lunch",em:"☀️",items:["Rajma or Chickpeas/Chole (1 large bowl)","2 Rotis","Green salad"],p:"~18–20g"},{t:"Snack",em:"🌤️",items:["Paneer 100g (raw or grilled)","OR Greek Yogurt / Dahi","🥛 1 scoop Plant Protein (~24g)"],p:"~42–44g"},{t:"Dinner",em:"🌙",items:["Yellow Dal (Moong)","Rice — light and easy to digest","Tofu stir fry (80g)"],p:"~18g"}],
-   tip:"Add lemon to Dal/Rajma/Chole — Vitamin C significantly boosts iron and protein absorption."},
-  {id:2,title:"🍗 Non-Veg Muscle Plan",badge:"Option 2 · Non-Veg",bc:"#8B2500",bb:"#FFEEEE",focus:"Lean meats + whey protein for maximum muscle.",protein:"~130g+",
-   meals:[{t:"Breakfast",em:"🌅",items:["3 Boiled Eggs (2 whites + 1 whole)","Oats with milk","🥛 1 scoop Whey Protein (~24g)"],p:"~44g"},{t:"Lunch",em:"☀️",items:["Chicken Breast 150g (grilled/curry)","2 Rotis","Cucumber + Tomato salad"],p:"~35–40g"},{t:"Snack",em:"🌤️",items:["Fish (Grilled/Tandoori) OR 2 eggs","🥛 1 scoop Whey post-workout (~24g)"],p:"~44–49g"},{t:"Dinner",em:"🌙",items:["Chicken/Fish Curry","Rice (avoid roti at night)","Steamed veggies"],p:"~25–30g"}],
-   tip:"Choose Rohu or Salmon — Omega-3 fats reduce muscle soreness and speed recovery."},
-  {id:3,title:"🥚 Eggetarian Smart Plan",badge:"Option 3 · Eggetarian",bc:"#7B5E00",bb:"#FFFBEA",focus:"Eggs + whey/plant protein — best of both worlds.",protein:"~120–130g",
-   meals:[{t:"Breakfast",em:"🌅",items:["Oats + Milk blended","🥛 1 scoop Whey / Plant Protein (~24g)","1 Banana"],p:"~35g"},{t:"Lunch",em:"☀️",items:["Dal + Rice","2 Egg Omelette (side)","Green salad"],p:"~25g"},{t:"Snack",em:"🌤️",items:["🥛 1 scoop Whey post-workout (~24g)","Curd / Buttermilk","1 Fruit"],p:"~30g"},{t:"Dinner",em:"🌙",items:["Egg Bhurji (3 eggs)","2 Rotis","Palak sabzi","Small bowl curd"],p:"~25g"}],
-   tip:"Grind oats to fine powder before blending — silky smooth shake, not chunky."},
-];
-
-let activePlanId=null;
-function renderPlanCards(){
-  const c=document.getElementById('planCards');c.innerHTML='';
-  dietPlans.forEach(plan=>{
-    const d=document.createElement('div');d.className='plan-card'+(activePlanId===plan.id?' sel':'');
-    d.innerHTML=`<div class="plan-card-hdr"><div class="plan-badge" style="background:${plan.bb};color:${plan.bc}">${plan.badge}</div><h3>${plan.title}</h3><p>${plan.focus}</p></div><div class="plan-total"><div><div class="plan-total-lbl">Daily Protein</div><div class="plan-total-num" style="color:${plan.bc}">${plan.protein}</div></div><span style="font-size:12.5px;color:var(--sf);font-weight:600">View Plan →</span></div>`;
-    d.onclick=()=>openPlan(plan.id);c.appendChild(d);
-  });
-}
-function openPlan(id){
-  activePlanId=id;const plan=dietPlans.find(p=>p.id===id);
-  document.getElementById('detailTitle').textContent=plan.title;
-  document.getElementById('detailProtein').textContent=plan.protein;
-  const mel=document.getElementById('detailMeals');mel.innerHTML='';
-  plan.meals.forEach(m=>{
-    const r=document.createElement('div');r.className='meal-row';
-    r.innerHTML=`<div class="meal-time"><span class="meal-em">${m.em}</span>${m.t}</div><div>${m.items.map(i=>`<div class="meal-item-row">${i}</div>`).join('')}</div><div class="meal-p">${m.p}<span class="kc">protein</span></div>`;
-    mel.appendChild(r);
-  });
-  document.getElementById('detailTip').textContent=plan.tip;
-  document.getElementById('planDetail').classList.add('vis');
-  document.getElementById('planDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
-  renderPlanCards();
-}
-function closePlanDetail(){activePlanId=null;document.getElementById('planDetail').classList.remove('vis');renderPlanCards();}
-
-// ===================== BMI =====================
-document.getElementById('bmiHeightUnit').onchange=function(){
-  document.getElementById('bmiInchWrap').style.display=this.value==='ft'?'block':'none';
-};
-
-function calcBMI(){
-  let wkg=parseFloat(document.getElementById('bmiWeight').value)||70;
-  if(document.getElementById('bmiWeightUnit').value==='lb') wkg=wkg*0.453592;
-  let hcm=parseFloat(document.getElementById('bmiHeight').value)||175;
-  const hUnit=document.getElementById('bmiHeightUnit').value;
-  if(hUnit==='ft'){const inches=parseFloat(document.getElementById('bmiInches').value)||0;hcm=(hcm*12+inches)*2.54;}
-  const age=parseInt(document.getElementById('bmiAge').value)||25;
-  const gender=document.getElementById('bmiGender').value;
-  const activity=parseFloat(document.getElementById('bmiActivity').value)||1.55;
-  const goal=document.getElementById('bmiGoal').value;
-  const hm=hcm/100;
-  const bmi=wkg/(hm*hm);
-  let bmr=gender==='male'?(10*wkg+6.25*hcm-5*age+5):(10*wkg+6.25*hcm-5*age-161);
-  let tdee=bmr*activity;
-  if(goal==='loss') tdee-=500;
-  else if(goal==='gain') tdee+=300;
-  const protein=Math.round(wkg*(goal==='gain'?2:goal==='loss'?1.8:1.6));
-  const ideal1=(18.5*hm*hm).toFixed(1);
-  const ideal2=(24.9*hm*hm).toFixed(1);
-
-  let cat,col,bgCol,advTitle,advText;
-  if(bmi<18.5){cat='Underweight';col='#1565C0';bgCol='rgba(21,101,192,.08)';advTitle='You need to gain weight';advText='Focus on calorie-dense nutrient-rich foods: nuts, paneer, ghee in moderation, dal with rice. Aim for 3 full meals + 2 snacks. Strength training helps build healthy muscle mass.';}
-  else if(bmi<25){cat='Normal Weight';col='#2E7D32';bgCol='rgba(46,125,50,.08)';advTitle='Great! Maintain this weight';advText='Your BMI is in the healthy range. Focus on balanced nutrition — adequate protein ('+protein+'g/day), whole grains, vegetables, and staying active. Stay consistent!';}
-  else if(bmi<30){cat='Overweight';col='#E65100';bgCol='rgba(230,81,0,.08)';advTitle='Time to lose some weight';advText='Reduce refined carbs, sugary drinks, and fried foods. Increase protein intake (keeps you full), add more vegetables. Aim for a 300–500 kcal daily deficit through diet and exercise.';}
-  else{cat='Obese';col='#C62828';bgCol='rgba(198,40,40,.08)';advTitle='Health risk — action needed';advText='Consult a doctor or nutritionist. Focus on portion control, cut sugar and processed foods, increase fiber and protein. Even a 5–10% weight loss brings significant health benefits.';}
-
-  const bmiNum=bmi.toFixed(1);
-  const el=document.getElementById('bmiCircle');
-  el.style.borderColor=col;el.style.background=bgCol;
-  document.getElementById('bmiVal').textContent=bmiNum;document.getElementById('bmiVal').style.color=col;
-  document.getElementById('bmiLab').textContent=cat;document.getElementById('bmiLab').style.color=col;
-  const badge=document.getElementById('bmiCatBadge');badge.textContent=cat;badge.style.background=bgCol;badge.style.color=col;
-  document.getElementById('bCalVal').textContent=Math.round(tdee);
-  document.getElementById('bProVal').textContent=protein;
-  document.getElementById('bIdealVal').textContent=ideal1+'–'+ideal2;
-  document.getElementById('bBMRVal').textContent=Math.round(bmr);
-  const pct=Math.min(99,Math.max(1,((bmi-10)/30)*100));
-  document.getElementById('bmiNeedle').style.left=pct+'%';
-  document.getElementById('bmiAdvTitle').textContent=advTitle;
-  document.getElementById('bmiAdvText').textContent=advText;
-  document.getElementById('bmiDefault').style.display='none';
-  document.getElementById('bmiResult').classList.add('vis');
-  showToast('✅ BMI calculated!');
-}
-
-// ===================== SUGGESTIONS =====================
-const sugData={
-  veg:{
-    label:"🥦 Vegetarian",
-    meals:[
-      {em:"🌅",time:"Breakfast",name:"Power Breakfast",items:["Oats porridge with skim milk (200ml)","1 tbsp peanut butter","Handful of almonds (20g)","1 banana","<strong>🥛 1 scoop Plant Protein in milk/water (~24g protein)</strong>"],protein:"~42g"},
-      {em:"🥤",time:"Mid-Morning",name:"Protein Snack",items:["Greek Yogurt / Dahi (150g)","Handful of walnuts (15g)","1 fruit (apple/pear)"],protein:"~12g"},
-      {em:"☀️",time:"Lunch",name:"Complete Meal",items:["Rajma or Chole (1 bowl, 150g)","2 Rotis","100g Paneer bhurji / salad","Green chutney"],protein:"~28g"},
-      {em:"🌤️",time:"Evening Snack",name:"Light Fuel",items:["Sattu shake (2 tbsp in water/milk)","OR Roasted chana (30g)","1 glass buttermilk"],protein:"~10g"},
-      {em:"🌙",time:"Dinner",name:"Light Dinner",items:["Yellow moong dal (1 bowl)","1 cup rice OR 2 rotis","Tofu stir fry (100g)","Vegetable salad","<strong>🥛 1 scoop Plant Protein post-workout (or pre-bed) (~24g protein)</strong>"],protein:"~42g"},
-    ],
-    avoid:[
-      {em:"🌀",name:"Jalebi",why:"Pure Maida+sugar — zero nutrition"},
-      {em:"🍺",name:"Beer/Alcohol",why:"Empty calories, kills muscle"},
-      {em:"🧃",name:"Packaged Juice",why:"Sugar = Cola level"},
-      {em:"🍶",name:"Mayonnaise",why:"700 kcal/100g — pure fat"},
-      {em:"🟠",name:"Besan Ladoo",why:"500 kcal, mostly ghee"},
-    ],
-    tips:["Combine dal + rice at dinner — together they form a complete protein with all essential amino acids.","Add lemon to dal/chole to triple iron and protein absorption (Vitamin C effect).","Include Sattu powder — it's the most underrated Indian superfood with 21g protein per 100g.","Eat paneer raw or lightly grilled — overcooking destroys protein quality.","Soak chickpeas overnight and sprout them — sprouting increases protein bioavailability by 30%."],
-    note:"⚠️ Vegetarian diets often lack B12, Zinc, and complete protein. Supplement B12 and combine grains + legumes at every meal."
-  },
-  nonveg:{
-    label:"🍗 Non-Vegetarian",
-    meals:[
-      {em:"🌅",time:"Breakfast",name:"Muscle Breakfast",items:["3 Boiled Eggs (2 white + 1 whole)","Oats with milk (200ml)","1 banana","<strong>🥛 1 scoop Whey Protein in milk (~24g protein)</strong>"],protein:"~52g"},
-      {em:"🥤",time:"Mid-Morning",name:"Protein Snack",items:["Greek Yogurt (150g)","10 almonds","1 fruit"],protein:"~12g"},
-      {em:"☀️",time:"Lunch",name:"Muscle Meal",items:["Chicken Breast 150–200g (grilled/curry)","2 Rotis","Cucumber + Tomato salad","Dal (1 small bowl)"],protein:"~45g"},
-      {em:"🌤️",time:"Evening Snack",name:"Recovery Snack",items:["Fish (Tuna/Rohu) 100g","OR Boiled eggs 2","Green tea"],protein:"~22g"},
-      {em:"🌙",time:"Dinner",name:"Light Dinner",items:["Chicken/Fish curry (150g)","1 cup rice (avoid roti)","Steamed broccoli or spinach","Buttermilk","<strong>🥛 1 scoop Whey post-workout (~24g protein)</strong>"],protein:"~54g"},
-    ],
-    avoid:[
-      {em:"🥤",name:"Lassi (Sweet)",why:"15g sugar per 100ml adds up fast"},
-      {em:"🌀",name:"Jalebi / Sweets",why:"Pure sugar spikes insulin — kills gains"},
-      {em:"🍺",name:"Beer / Alcohol",why:"Suppresses testosterone, increases cortisol"},
-      {em:"🍶",name:"Mayonnaise",why:"High fat, empty calories"},
-      {em:"🧃",name:"Packaged Juice",why:"Drink whole fruit instead"},
-    ],
-    tips:["Eat protein within 30–45 minutes after workout — this is the anabolic window for muscle repair.","Choose Rohu or Salmon for fish — Omega-3 reduces inflammation and muscle soreness.","Avoid frying chicken/fish — grill, bake or air-fry to keep protein quality and save 150+ kcal.","Drink 3–4 liters of water daily — protein synthesis requires hydration.","Distribute protein across 4–5 meals (30–40g each) — the body can only absorb ~40g at once."],
-    note:"⚠️ High non-veg diets increase uric acid. Balance with vegetables, hydration, and limit red meat to 2x per week."
-  },
-  egg:{
-    label:"🥚 Eggetarian",
-    meals:[
-      {em:"🌅",time:"Breakfast",name:"Protein Shake Breakfast",items:["Oats (40g) blended with milk (250ml)","<strong>🥛 1 scoop Whey / Plant Protein (~24g protein)</strong>","1 banana","1 tbsp honey"],protein:"~35g"},
-      {em:"🥤",time:"Mid-Morning",name:"Egg Snack",items:["3 Boiled Egg Whites","OR 2 whole boiled eggs","1 fruit","Green tea"],protein:"~11–12g"},
-      {em:"☀️",time:"Lunch",name:"Dal + Egg Combo",items:["Dal (1 bowl)","Rice or 2 Rotis","2 Egg Omelette (side)","Green salad + chutney"],protein:"~25g"},
-      {em:"🌤️",time:"Evening Snack",name:"Quick Fuel",items:["Roasted chana (30g)","OR Buttermilk","<strong>🥛 1 scoop Whey / Plant Protein post-workout (~24g protein)</strong>"],protein:"~36g"},
-      {em:"🌙",time:"Dinner",name:"Egg Bhurji Dinner",items:["Egg Bhurji (3 eggs)","2 Rotis","Palak or mixed veg","Curd (small bowl)"],protein:"~22g"},
-    ],
-    avoid:[
-      {em:"🌀",name:"Jalebi",why:"Zero nutrition; pure sugar bomb"},
-      {em:"🥐",name:"Maida products",why:"Refined flour; no fiber, spikes insulin"},
-      {em:"🍺",name:"Beer/Alcohol",why:"Interferes with protein synthesis"},
-      {em:"🍶",name:"Mayonnaise",why:"700 kcal — avoid or use sparingly"},
-      {em:"🧃",name:"Packaged Juice",why:"Eat whole fruit instead"},
-    ],
-    tips:["The egg+oats breakfast shake is your biggest protein hack — 30–35g before 9am sets your whole day.","Egg whites are almost pure protein (3.6g each, 17 kcal) — eat 3–5 whites daily as a snack.","Grind oats into powder before blending — far better texture for shakes.","Eggs + dal + rice = complete amino acid profile that rivals chicken breast.","Don't discard yolks entirely — the yolk has Vitamin D, choline, and healthy fats. 1 whole + 2 whites is the ideal ratio."],
-    note:"⚠️ Eggetarian diet is excellent for protein but watch cholesterol — limit to 2–3 full egg yolks per day maximum."
-  }
-};
-
-let activeDiet='veg';
-function selectDiet(diet,btn){
-  activeDiet=diet;
-  document.querySelectorAll('.diet-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderSuggestions();
-}
-
-function renderSuggestions(){
-  const data=sugData[activeDiet];
-  const el=document.getElementById('sugContent');
-  el.classList.add('vis');
-  el.innerHTML=`
-    <div class="sug-section">
-      <div class="sug-section-title">🍽️ Complete Daily Meal Plan — ${data.label}</div>
-      <div class="sug-cards">
-        ${data.meals.map(m=>`
-          <div class="sug-card">
-            <div class="sug-card-top">
-              <span class="sc-em">${m.em}</span>
-              <div><div class="sc-name">${m.name}</div><div class="sc-time">${m.time}</div></div>
-            </div>
-            <ul class="sug-items">${m.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-            <span class="sug-protein">~${m.protein} protein</span>
-          </div>`).join('')}
-      </div>
-    </div>
-    <div class="sug-section">
-      <div class="sug-section-title">🚫 Foods to Avoid</div>
-      <div class="avoid-grid">
-        ${data.avoid.map(a=>`
-          <div class="avoid-card">
-            <span class="ac-em">${a.em}</span>
-            <div class="ac-name">${a.name}</div>
-            <div class="ac-why">${a.why}</div>
-          </div>`).join('')}
-      </div>
-    </div>
-    <div class="sug-section">
-      <div class="sug-section-title">💡 Top Tips for ${data.label} Diet</div>
-      <div class="tip-list">
-        ${data.tips.map((t,i)=>`<div class="tip-row"><span class="tip-num">${i+1}</span><p>${t}</p></div>`).join('')}
-      </div>
-    </div>
-    <div class="warn-box">
-      <div class="wt">⚠️ Important Note</div>
-      <p>${data.note}</p>
-    </div>
-  `;
-}
-
-// ===================== MY DIET CALCULATOR =====================
-function calcMyDiet(){
-  const wt = parseFloat(document.getElementById('cd-weight').value)||74;
-  const ft = parseFloat(document.getElementById('cd-feet').value)||5;
-  const inch = parseFloat(document.getElementById('cd-inch').value)||10;
-  const age = parseFloat(document.getElementById('cd-age').value)||25;
-  const act = parseFloat(document.getElementById('cd-activity').value)||1.55;
-  const goal = document.getElementById('cd-goal').value;
-  const shakes = parseInt(document.getElementById('cd-shakes').value)||2;
-
-  const htcm = ft*30.48 + inch*2.54;
-  // Mifflin-St Jeor BMR (male)
-  const bmr = 10*wt + 6.25*htcm - 5*age + 5;
-  const tdee = Math.round(bmr * act);
-  let calTarget = tdee;
-  if(goal==='loss') calTarget = tdee - 300;
-  if(goal==='gain') calTarget = tdee + 300;
-
-  const protMin = Math.round(wt * 1.8);
-  const protMax = Math.round(wt * 2.2);
-  const protTarget = Math.round(wt * 2.0);
-  const shakeProtein = shakes * 24;
-  const foodProtein = protTarget - shakeProtein;
-
-  // Render stats
-  const statsEl = document.getElementById('cd-stats');
-  const goalLabel = goal==='loss'?'Fat Loss (Cut)':goal==='gain'?'Muscle Gain (Bulk)':'Maintain / Recompose';
-  statsEl.innerHTML = `
-    <div class="calc-stat"><div class="cs-lbl">Daily Calories</div><div class="cs-val">${calTarget}</div><div class="cs-unit">kcal · ${goalLabel}</div></div>
-    <div class="calc-stat"><div class="cs-lbl">Protein Target</div><div class="cs-val">${protTarget}g</div><div class="cs-unit">${protMin}–${protMax}g range</div></div>
-    <div class="calc-stat"><div class="cs-lbl">From Shakes</div><div class="cs-val">${shakeProtein}g</div><div class="cs-unit">${shakes} scoop${shakes>1?'s':''} daily</div></div>
-    <div class="calc-stat"><div class="cs-lbl">From Food</div><div class="cs-val">${foodProtein}g</div><div class="cs-unit">eggs · dal · curd</div></div>
-    <div class="calc-stat"><div class="cs-lbl">BMR</div><div class="cs-val">${Math.round(bmr)}</div><div class="cs-unit">base kcal/day</div></div>
-    <div class="calc-stat"><div class="cs-lbl">TDEE</div><div class="cs-val">${tdee}</div><div class="cs-unit">with activity</div></div>
-  `;
-
-  // Generate 3 personalised plans
-  const eggsNeeded = Math.max(4, Math.round((foodProtein - 20) / 6));
-  const plans = [
-    {
-      num:1, color:'#1A6B3C', bg:'#E8F5E9', border:'#66BB6A',
-      label:'Plan A — Optimised Current Diet',
-      sub:'Fix your timing · Same foods, smarter splits',
-      keyChange:`Move your protein shake to <strong>post-workout (4–5 PM)</strong> instead of morning. Add 2 eggs to lunch. Split night eggs into 4 at dinner + rest as evening snack.`,
-      meals:[
-        {t:'🌅 Breakfast',items:[`Milk 200ml + High Protein Oats → ~22g`,`${shakes===1?'1 scoop Plant Protein → ~24g':'1 scoop Plant Protein → ~24g'}`,`1 Banana`],p:`~46g`},
-        {t:'☀️ Lunch',items:['Rajma Chawal','2 Boiled Eggs (side) → ~12g','Green salad'],p:`~20g`},
-        {t:'🌤️ Evening',items:['Coffee + milk 200ml → ~10g',`${shakes===2?'1 scoop Whey post-workout → ~24g':'Roasted chana 30g → ~7g'}`,`2 Bananas`],p:shakes===2?'~36g':'~17g'},
-        {t:'🌙 Dinner',items:['4 Eggs (3 whole + 1 white) → ~27g','Curd 200ml → ~7g','2 Rotis + Sabzi'],p:'~34g'},
-      ],
-      totalP: shakes===2?136:117
-    },
-    {
-      num:2, color:'#0D47A1', bg:'#E3F2FD', border:'#90CAF9',
-      label:'Plan B — Maximum Muscle Plan',
-      sub:'5 meals · Perfectly timed · High protein absorption',
-      keyChange:`5 meal splits ensure <strong>~30–35g protein every 3 hours</strong> — maximum muscle protein synthesis throughout the day. Ideal for muscle gain goal.`,
-      meals:[
-        {t:'🌅 Breakfast 7AM',items:[`Oats 40g + Milk 200ml → ~15g`,`1 scoop Plant/Whey → ~24g`,`1 Banana`],p:'~39g'},
-        {t:'🥤 Mid-Morning 10AM',items:['3 Egg Whites → ~11g','1 Whole Egg → ~6g','1 Apple'],p:'~17g'},
-        {t:'☀️ Lunch 1PM',items:['Rajma Chawal','2 Egg Omelette (side) → ~12g','Green chutney'],p:'~20g'},
-        {t:'🌤️ Post-Workout 5PM',items:[shakes===2?'1 scoop Whey → ~24g':'Roasted Chana 30g → ~7g','Curd 200ml → ~7g','1 Banana'],p:shakes===2?'~31g':'~14g'},
-        {t:'🌙 Dinner 8PM',items:['Egg Bhurji (3 eggs) → ~18g','2 Rotis + Palak sabzi','Small bowl curd → ~4g'],p:'~22g'},
-      ],
-      totalP: shakes===2?129:112
-    },
-    {
-      num:3, color:'#6A1B9A', bg:'#F3E5F5', border:'#CE93D8',
-      label:'Plan C — Lean Cut Plan',
-      sub:'Lower carbs · High protein density · Fat loss focus',
-      keyChange:`Lower calorie meals with <strong>high protein-to-calorie ratio</strong>. Reduces carbs at dinner, keeps protein high to preserve muscle while cutting fat. Perfect if goal is to lean out.`,
-      meals:[
-        {t:'🌅 Breakfast 7AM',items:[`Oats 30g + Milk 150ml → ~11g`,`1 scoop Plant/Whey → ~24g`,`5 Almonds`],p:'~35g'},
-        {t:'🥤 Mid-Morning 10AM',items:['4 Egg Whites → ~14g','Green tea','1 Fruit'],p:'~14g'},
-        {t:'☀️ Lunch 1PM',items:['Moong Dal (1 bowl) → ~12g','1 Roti only','2 Whole Eggs (omelette) → ~12g'],p:'~24g'},
-        {t:'🌤️ Evening 5PM',items:[shakes===2?'1 scoop Whey + water → ~24g':'Buttermilk + Chana → ~9g','Coffee black (0 sugar)'],p:shakes===2?'~24g':'~9g'},
-        {t:'🌙 Dinner 8PM',items:['3 Egg Bhurji → ~18g','No roti / 1 roti max','Curd 150ml → ~5g','Palak sabzi'],p:'~23g'},
-      ],
-      totalP: shakes===2?120:105
-    }
-  ];
-
-  const plansEl = document.getElementById('cd-plans');
-  plansEl.innerHTML = plans.map(p => `
-    <div class="sug-plan" style="border-color:${p.border}">
-      <div class="sug-plan-hdr" style="background:${p.bg}">
-        <div class="sp-num" style="background:${p.color}">${p.num}</div>
-        <div>
-          <div class="sp-title" style="color:${p.color}">${p.label}</div>
-          <div class="sp-sub" style="color:${p.color}">${p.sub}</div>
-        </div>
-      </div>
-      <div class="sug-plan-body">
-        <div class="sp-meals">
-          ${p.meals.map(m=>`
-            <div class="sp-meal">
-              <div class="sp-meal-time">${m.t}</div>
-              <ul class="sp-meal-items">${m.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-              <div class="sp-meal-prot">⚡ ${m.p} protein</div>
-            </div>`).join('')}
-        </div>
-        <div class="sp-total-row">
-          <span class="sp-total-item">Total Protein: <span>~${p.totalP}g</span></span>
-          <span class="sp-total-item" style="margin-left:auto">Target: <span>${protTarget}g</span></span>
-        </div>
-        <div class="sp-key-change">💡 <strong>Key change:</strong> ${p.keyChange}</div>
-      </div>
-    </div>`).join('');
-
-  document.getElementById('cd-results').classList.add('vis');
-  document.getElementById('cd-results').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-// INIT
-buildQuickFoods();
-buildCatBar();
-renderGrid();
-renderPlanCards();
-renderSuggestions();
-// Wire up +/- buttons properly
-document.getElementById('qtyMinus').addEventListener('click',function(e){e.preventDefault();adjQty(-1);});
-document.getElementById('qtyPlus').addEventListener('click',function(e){e.preventDefault();adjQty(1);});
-// Also highlight active qty btn on input change
-document.getElementById('weightInput').addEventListener('input',function(){
-  highlightQBtn(parseFloat(this.value));
-  updatePreview();
-});
+// Init
+init();
 </script>
 </body>
 </html>
